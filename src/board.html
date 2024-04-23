@@ -21,17 +21,49 @@
 <body>
     <!-- <iframe src="navbar.html" class="navbar"></iframe> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">My-Kanban</a>
+        <a class="navbar-brand" href="index.html">My-Kanban</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="features.html">Features</a>
-                <a class="nav-item nav-link" href="board.html">Board</a>
+                <a class="nav-item nav-link" href="#">Board</a>
             </div>
         </div>
     </nav>
+
+
+
+    <div class="container">
+        <ul>
+            <li class="draggable">New Item</li>
+        </ul>
+        <div class="row">
+            <div class="col-sm">
+                <p>TODO</p>
+                <ul class="sortable todo_sortable">
+                    <li>Item 1</li>
+                </ul>
+            </div>
+            <div class="col-sm">
+                <p>In-Progress</p>
+                <ul class="sortable in_progress_sortable">
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                    <li>Item 4</li>
+                </ul>
+
+            </div>
+            <div class="col-sm">
+                <p>Accomplished</p>
+                <ul class="sortable accomplished_sortable">
+                    <li>Item 5</li>
+                    <li>Item 6</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

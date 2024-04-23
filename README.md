@@ -8,10 +8,10 @@ Build in a Bottoms-Up-Approach.
 |--------------------|------------------------------------------------|
 | TODO               | Create a '+' button to add TODO cards.          |
 |                    | Redesign the location of current 'DRAG ITEM'.   |
-|                    | Choose a style to be applied across the site.|
+|                    | Choose a style to be applied across the site. |
 |                    | Better customize items functionality for better experience.|
-| In Progress        | Create features page explain functionality so far.      |
+| In Progress        | Create features page explain functionality so far.|
 | Accomplished       | Initial Navigation Bar Location                |
-|                    | Break down board into 3 categories                |
+|                    | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 
