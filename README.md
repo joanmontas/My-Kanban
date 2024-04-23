@@ -10,6 +10,7 @@ Build in a Bottoms-Up-Approach.
 |                    | Redesign the location of current 'DRAG ITEM'.   |
 |                    | Choose a style to be applied across the site. |
 |                    | Better customize items functionality for better experience.|
+|                    | Items should have accordion-like features.|
 | In Progress        | Create features page explain functionality so far.|
 | Accomplished       | Initial Navigation Bar Location                |
 |                    | Break down board into 3 categories             |
