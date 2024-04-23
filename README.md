@@ -15,3 +15,5 @@ Build in a Bottoms-Up-Approach.
 |                    | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 
+## License
+Licensed under the GNU General Public License v3.0. See LICENSE for detail.
