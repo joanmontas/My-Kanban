@@ -16,4 +16,4 @@ Build in a Bottoms-Up-Approach.
 |                    | Items can be interchanged in different columns.|
 
 ## License
-Licensed under the GNU General Public License v3.0. See LICENSE for detail.
+Licensed under the GNU General Public License v3.0. See ./LICENSE for detail.
