@@ -1,16 +1,21 @@
+// Copyright Joan Montas
+// All rights reserved.
+// License under GNU General Public License v3.0
+
 $(function() {
-    $("#sortable").sortable({
-        revert: true
+    // Make all unordered lists sortable
+    $("ul.sortable").sortable({
+        revert: true,
+        connectWith: ".sortable" // Enable dragging between sortable lists
     });
 
-    $("#sortable-2").sortable({
-        revert: true
-    });
-
-    $("#draggable").draggable({
-        connectToSortable: "#sortable",
+    // Make specific list items draggable (optional)
+    $(".draggable").draggable({
+        connectToSortable: ".sortable",
         helper: "clone",
         revert: "invalid"
     });
+
+    // Prevent text selection while dragging
     $("ul, li").disableSelection();
 });
