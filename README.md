@@ -7,9 +7,11 @@ Build in a Bottoms-Up-Approach.
 | Column             | Description                                    |
 |--------------------|------------------------------------------------|
 |TODO                | Choose a style to be applied across the site. |
-|                    | Better customize items functionality for better experience.|
+|                    | Better customize items functionality for better |
 |                    | Create features page explain functionality so far.|
-| In Progress        | Add metadata to each card.|
+|                    | Add Date to the form.| 
+|                    | Add metadata to each card.|
+| In Progress        | Research unique id: https://stackoverflow.com/questions/28822054/firebase-how-to-generate-a-unique-numeric-id-for-key| experience.|
 | Accomplished       | Initial Navigation Bar Location                |
 |                    | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
@@ -20,7 +22,8 @@ Build in a Bottoms-Up-Approach.
 |                    | Create form inside each accordion.       |
 |                    |  Add save button|
 |                    | Place a delete button or check box in each accordion|
-
+|                    | Add buttons to each column and make their js function. |
+| In Progress        | Research event, then handle for creation and being to another column.|
 
 ## License
 Licensed under the GNU General Public License v3.0. See ./LICENSE for detail.
