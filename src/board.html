@@ -33,21 +33,11 @@
         </div>
     </nav>
 
-
-
     <div class="container">
-        <ul>
-            <li class="draggable">
-                <div class="accordion">
-                    <h3>asd</h3>
-                    <div>asd</div>
-                </div>
-            </li>
-        </ul>
         <div class="row">
             <div class="col-sm">
                 <p>TODO</p>
-                <ul class="sortable todo_sortable">
+                <ul class="sortable" id="todo_sortable">
                     <li>
                         <div class="accordion">
                             <h3>First thing</h3>
@@ -55,10 +45,11 @@
                         </div>
                     </li>
                 </ul>
+                <button type="button" class="btn btn-primary" id="add_todo">TODO +</button>
             </div>
             <div class="col-sm">
                 <p>In-Progress</p>
-                <ul class="sortable in_progress_sortable">
+                <ul class="sortable" id="in_progress_sortable">
                     <li>
                         <div class="accordion">
                             <h3>1 progress</h3>
@@ -78,11 +69,11 @@
                         </div>
                     </li>
                 </ul>
-
             </div>
+
             <div class="col-sm">
                 <p>Accomplished</p>
-                <ul class="sortable accomplished_sortable">
+                <ul class="sortable" id="accomplished_sortable">
                     <li>
                         <div class="accordion">
                             <h3>second Finished</h3>

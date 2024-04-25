@@ -19,14 +19,14 @@ li {
     width: 150px;
 }
 
-.todo_sortable {
+#todo_sortable {
     background-color: #c41818;
 }
 
-.in_progress_sortable {
+#in_progress_sortable {
     background-color: #d3760c;
 }
 
-.accomplished_sortable {
+#accomplished_sortable {
     background-color: #68d311;
 }
