@@ -16,22 +16,29 @@ $(function() {
     $("ul, li").disableSelection();
 });
 
-$("#add_todo").on("click", function() {
-    var todoUl = $("#todo_sortable");
+$("#add_todo").click(function() {
+    var newItem = '<li>' +
+        '<div class="accordion">' +
+        '<h3>second Finished</h3>' +
+        '<form>' +
+        '<div class="form-group">' +
+        '<label>Title</label>' +
+        '<input type="text" class="form-control" placeholder="Card Name">' +
+        '</div>' +
+        '<div class="form-group">' +
+        '<label>Detail</label>' +
+        '<textarea class="form-control" rows="3"></textarea>' +
+        '<button type="button" class="btn btn-primary">Save</button>' +
+        '<button type="button" class="btn btn-danger">Delete</button>' +
+        '</div>' +
+        '</form>' +
+        '</div>' +
+        '</li>';
 
-    var newLi = $("<li>");
-    var accordionDiv = $("<div>").addClass("accordion");
-    var accordionDivH3 = $("<h3>").text("New Thing");
-    var accordionDivDiv = $("<div>").text("New asd");
+    $("#todo_sortable").append(newItem);
 
-    accordionDivH3.appendTo(accordionDiv);
-    accordionDivDiv.appendTo(accordionDiv);
-    accordionDiv.appendTo(newLi);
-    newLi.appendTo(todoUl);
-
-    accordionDiv.accordion({
+    $(".accordion").accordion({
         collapsible: true,
         active: false
     });
-
 });
