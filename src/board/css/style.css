@@ -1,0 +1,30 @@
+/*
+    Copyright Joan Montas
+    All rights reserved.
+    License under GNU General Public License v3.0 ul
+*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+li {
+    width: 100%;
+}
+
+#todo_sortable {
+    background-color: #c41818;
+}
+
+#in_progress_sortable {
+    background-color: #d3760c;
+}
+
+#accomplished_sortable {
+    background-color: #68d311;
+}
