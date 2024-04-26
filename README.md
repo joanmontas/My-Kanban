@@ -2,6 +2,24 @@
 My-Kanban is a Kanban board app made with Kanban principles.
 Build in a Bottoms-Up-Approach.
 
+### NOTE: Include Config.html
+Config.html should be included.
+```.hmtl
+<script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: <>,
+    authDomain: <>,
+    databaseURL: <>,
+    projectId: <>,
+    storageBucket: <>,
+    messagingSenderId: <>,
+    appId: <>,
+    measurementId: <>
+    };
+</script>
+```
+
 ### My-Kanban's Kanban Board
 
 | Column             | Description                                    |
