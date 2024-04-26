@@ -46,6 +46,7 @@ Config.html should be included.
 |                    | Initialize back end|
 |                    | Compartamentalize apps|
 |                    | Althought not necessary, hide the firebaseConfiguration via config.html|
+|                    | Add drag touch screen capabilities|
 
 ## License
 Licensed under the GNU General Public License v3.0. See ./LICENSE for detail.
