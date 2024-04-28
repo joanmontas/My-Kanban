@@ -26,8 +26,7 @@ Config.js should be included.
 |                    | Better customize items functionality for better |
 |                    | Create features page explain functionality so far.|
 |                    | Add Date to the form.|
-|                    | Add metadata to each card.|
-|                    | Research unique id: https://stackoverflow.com/questions/28822054/firebase-how-to-generate-a-unique-numeric-id-for-key| experience.|
+|                    | Gather data from db on ready and display.|
 | In Progress        |                                                |
 | Accomplished       | Initial Navigation Bar Location                |
 |                    | Break down board into 3 categories             |
@@ -47,6 +46,8 @@ Config.js should be included.
 |                    | Add drag touch screen capabilities|
 |                    | Add function to the dynamically added accordion   |
 |                    | Connect Front and Back-end (Dummy only)   |
+|                    | Research unique id: https://stackoverflow.com/questions/28822054/firebase-how-to-generate-a-unique-numeric-id-for-key| experience.|
+|                    | Add metadata to each card.|
 
 
 ## License

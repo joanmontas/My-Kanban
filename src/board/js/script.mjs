@@ -21,11 +21,10 @@ import {
 import {
     getDatabase,
     set,
+    push,
     get,
-    update,
     remove,
     ref,
-    child
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
 // Initialize Firebase
@@ -34,6 +33,7 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 
 function saveData() {
+    // TODO(Joan) modify as to update already existing - Joan
     set(ref(db, "someLocation/" + "someID"), {
         Data: "someData",
     }).then(() => {
@@ -41,6 +41,62 @@ function saveData() {
     }).catch((error) => {
         alert("Data added failed: ", error);
     })
+}
+
+function newData(li) {
+    var liID = $(li).attr("id");
+    var ulID = $(li).parent().attr('id');
+
+    var userID = "sudo"; // TODO(Joan) ID should be unique user ID when they login - Joan
+
+    var path = "test/";
+    path = path + "/" + userID;
+    path = path + "/" + ulID;
+
+    // TODO(Joan) Extact data from the il - Joan
+    var h3Element = $(li).find('h3');
+    var textAreaVal = $(li).find('textarea').val();
+    const inputVal = $(li).find('input[type="text"]').val(); // More specific selector
+
+    const myData = {
+        title: inputVal,
+        detail: textAreaVal,
+    };
+
+    console.log(textAreaVal);
+    console.log(inputVal);
+
+    if (typeof liID === 'undefined') {
+        // alert("New");
+        const dbRef = ref(db, path);
+        push(dbRef, myData)
+            .then((snapshot) => {
+                li.id = snapshot.key;
+                h3Element.text(inputVal);
+            })
+            .catch((error) => {
+                console.error("Error: Unable to push data:", error);
+            });
+    } else {
+        // alert("OLD");
+        path = path + "/" + liID;
+        const dbRef = ref(db, path);
+
+        get(dbRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                set(dbRef, myData).then(() => {
+                    h3Element.text(inputVal);
+                }).catch((error) => {
+                    alert("Error: Could not update card:" + error);
+                })
+            } else {
+                alert("Error: The current card does not exist in the database.");
+            }
+        }).catch((error) => {
+            // Handle errors from get() method
+            alert("Error: Could not hadle updating values" + error);
+        });
+    }
 }
 
 $(document).ready(function() {
@@ -60,7 +116,7 @@ $(document).ready(function() {
     $("#add_todo").click(function() {
         const newLi = document.createElement("li");
         var newLiInner = '<div class="accordion">' +
-            '<h3>New Accomplished</h3>' +
+            '<h3>New TODO</h3>' +
             '<form>' +
             '<div class="form-group">' +
             '<label>New Accomplished</label>' +
@@ -81,8 +137,11 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        saveBut.addEventListener("click", saveData);
-        delBut.addEventListener("click", saveData);
+        delBut.addEventListener("click", newData);
+
+        saveBut.addEventListener('click', function() {
+            newData(newLi);
+        });
 
         $(".accordion").accordion({
             collapsible: true,
@@ -93,7 +152,7 @@ $(document).ready(function() {
     $("#add_in_progress").click(function() {
         const newLi = document.createElement("li");
         var newLiInner = '<div class="accordion">' +
-            '<h3>New Accomplished</h3>' +
+            '<h3>New Progress</h3>' +
             '<form>' +
             '<div class="form-group">' +
             '<label>New Accomplished</label>' +
@@ -114,8 +173,11 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        saveBut.addEventListener("click", saveData);
-        delBut.addEventListener("click", saveData);
+        delBut.addEventListener("click", newData);
+
+        saveBut.addEventListener('click', function() {
+            newData(newLi);
+        });
 
         $(".accordion").accordion({
             collapsible: true,
@@ -147,8 +209,11 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        saveBut.addEventListener("click", saveData);
-        delBut.addEventListener("click", saveData);
+        delBut.addEventListener("click", newData);
+
+        saveBut.addEventListener('click', function() {
+            newData(newLi);
+        });
 
         $(".accordion").accordion({
             collapsible: true,
