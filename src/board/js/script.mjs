@@ -32,18 +32,39 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
 
-function saveData() {
-    // TODO(Joan) modify as to update already existing - Joan
-    set(ref(db, "someLocation/" + "someID"), {
-        Data: "someData",
-    }).then(() => {
-        alert("Data added sucessfully!");
-    }).catch((error) => {
-        alert("Data added failed: ", error);
-    })
+function deleteData(li) {
+    // alert("delete!");
+
+    var liID = $(li).attr("id");
+    var ulID = $(li).parent().attr('id');
+
+    var userID = "sudo"; // TODO(Joan) ID should be unique user ID when they login - Joan
+
+    var path = "test/";
+    path = path + "/" + userID;
+    path = path + "/" + ulID + "/";
+
+    if (typeof liID === 'undefined') {
+        // alert("New");
+    } else {
+        // alert("OLD");
+        path = path + liID;
+        const someRef = ref(db, path); // Replace with actual key
+
+        remove(someRef)
+            .then(() => {
+                console.log("Data deleted successfully!");
+            })
+            .catch((error) => {
+                console.error("Error: Unable to delete data from db:", error);
+            });
+
+    }
+
+    li.remove();
 }
 
-function newData(li) {
+function saveData(li) {
     var liID = $(li).attr("id");
     var ulID = $(li).parent().attr('id');
 
@@ -53,10 +74,10 @@ function newData(li) {
     path = path + "/" + userID;
     path = path + "/" + ulID;
 
-    // TODO(Joan) Extact data from the il - Joan
     var h3Element = $(li).find('h3');
     var textAreaVal = $(li).find('textarea').val();
-    const inputVal = $(li).find('input[type="text"]').val(); // More specific selector
+
+    const inputVal = $(li).find('input').val();
 
     const myData = {
         title: inputVal,
@@ -85,7 +106,7 @@ function newData(li) {
         get(dbRef).then((snapshot) => {
             if (snapshot.exists()) {
                 set(dbRef, myData).then(() => {
-                    h3Element.text(inputVal);
+                    h3Element.html(inputVal);
                 }).catch((error) => {
                     alert("Error: Could not update card:" + error);
                 })
@@ -93,10 +114,191 @@ function newData(li) {
                 alert("Error: The current card does not exist in the database.");
             }
         }).catch((error) => {
-            // Handle errors from get() method
             alert("Error: Could not hadle updating values" + error);
         });
     }
+}
+
+function loadData() {
+    var userID = "sudo"; // TODO(Joan) ID should be unique user ID when they login - Joan
+
+    var path0 = "test/";
+    path0 = path0 + userID + "/";
+    path0 = path0 + "todo_sortable";
+
+    const dbRef0 = ref(db, path0);
+
+    get(dbRef0).then((snapshot) => {
+        const data = snapshot.val();
+
+        for (const key in data) {
+            const value = data[key];
+            const newLi = document.createElement("li");
+            var newLiInner = '<div class="accordion">' +
+                '<h3>New TODO</h3>' +
+                '<form>' +
+                '<div class="form-group">' +
+                '<label>Title</label>' +
+                '<input type="text" class="form-control" placeholder="Card Name">' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Detail</label>' +
+                '<textarea class="form-control" rows="3"></textarea>' +
+                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+                '</div>' +
+                '</form>' +
+                '</div>';
+            newLi.innerHTML = newLiInner;
+
+            newLi.id = key;
+            var h3Element = $(newLi).find('h3');
+            h3Element.text(value["title"]);
+
+            var textAreaVal = $(newLi).find('textarea');
+            textAreaVal.text(value["detail"]);
+
+            var inputVal = $(newLi).find("input");
+            inputVal.val(value["title"]);
+
+            const saveBut = newLi.querySelector("button.accordion-save-button");
+            const delBut = newLi.querySelector("button.accordion-delete-button");
+
+            delBut.addEventListener("click", function() {
+                deleteData(newLi);
+            });
+
+            saveBut.addEventListener('click', function() {
+                saveData(newLi);
+            });
+
+
+            $("#todo_sortable").append(newLi);
+        }
+
+        $(".accordion").accordion({
+            collapsible: true,
+            active: false
+        });
+    });
+
+    var path1 = "test/";
+    path1 = path1 + userID + "/";
+    path1 = path1 + "in_progress_sortable";
+
+    const dbRef1 = ref(db, path1);
+
+    get(dbRef1).then((snapshot) => {
+        const data = snapshot.val();
+
+        for (const key in data) {
+            const value = data[key];
+            const newLi = document.createElement("li");
+            var newLiInner = '<div class="accordion">' +
+                '<h3>New TODO</h3>' +
+                '<form>' +
+                '<div class="form-group">' +
+                '<label>Title</label>' +
+                '<input type="text" class="form-control" placeholder="Card Name">' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Detail</label>' +
+                '<textarea class="form-control" rows="3"></textarea>' +
+                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+                '</div>' +
+                '</form>' +
+                '</div>';
+            newLi.innerHTML = newLiInner;
+
+            newLi.id = key;
+            var h3Element = $(newLi).find('h3');
+            h3Element.text(value["title"]);
+
+            var textAreaVal = $(newLi).find('textarea');
+            textAreaVal.text(value["detail"]);
+
+            var inputVal = $(newLi).find("input");
+            inputVal.val(value["title"]);
+
+            const saveBut = newLi.querySelector("button.accordion-save-button");
+            const delBut = newLi.querySelector("button.accordion-delete-button");
+
+            delBut.addEventListener("click", function() {
+                deleteData(newLi);
+            });
+
+            saveBut.addEventListener('click', function() {
+                saveData(newLi);
+            });
+
+            $("#in_progress_sortable").append(newLi);
+        }
+
+        $(".accordion").accordion({
+            collapsible: true,
+            active: false
+        });
+    });
+
+    var path2 = "test/";
+    path2 = path2 + userID + "/";
+    path2 = path2 + "accomplished_sortable";
+
+    const dbRef2 = ref(db, path2);
+
+    get(dbRef2).then((snapshot) => {
+        const data = snapshot.val();
+
+        for (const key in data) {
+            const value = data[key];
+            const newLi = document.createElement("li");
+            var newLiInner = '<div class="accordion">' +
+                '<h3>New TODO</h3>' +
+                '<form>' +
+                '<div class="form-group">' +
+                '<label>Title</label>' +
+                '<input type="text" class="form-control" placeholder="Card Name">' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Detail</label>' +
+                '<textarea class="form-control" rows="3"></textarea>' +
+                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+                '</div>' +
+                '</form>' +
+                '</div>';
+            newLi.innerHTML = newLiInner;
+
+            newLi.id = key;
+            var h3Element = $(newLi).find('h3');
+            h3Element.text(value["title"]);
+
+            var textAreaVal = $(newLi).find('textarea');
+            textAreaVal.text(value["detail"]);
+
+            var inputVal = $(newLi).find("input");
+            inputVal.val(value["title"]);
+
+            const saveBut = newLi.querySelector("button.accordion-save-button");
+            const delBut = newLi.querySelector("button.accordion-delete-button");
+
+            delBut.addEventListener("click", function() {
+                deleteData(newLi);
+            });
+
+            saveBut.addEventListener('click', function() {
+                saveData(newLi);
+            });
+
+            $("#accomplished_sortable").append(newLi);
+        }
+
+        $(".accordion").accordion({
+            collapsible: true,
+            active: false
+        });
+    });
 }
 
 $(document).ready(function() {
@@ -113,13 +315,15 @@ $(document).ready(function() {
 
     $("ul, li").disableSelection();
 
+    loadData();
+
     $("#add_todo").click(function() {
         const newLi = document.createElement("li");
         var newLiInner = '<div class="accordion">' +
             '<h3>New TODO</h3>' +
             '<form>' +
             '<div class="form-group">' +
-            '<label>New Accomplished</label>' +
+            '<label>Title</label>' +
             '<input type="text" class="form-control" placeholder="Card Name">' +
             '</div>' +
             '<div class="form-group">' +
@@ -137,10 +341,12 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        delBut.addEventListener("click", newData);
+        delBut.addEventListener("click", function() {
+            deleteData(newLi);
+        });
 
         saveBut.addEventListener('click', function() {
-            newData(newLi);
+            saveData(newLi);
         });
 
         $(".accordion").accordion({
@@ -155,7 +361,7 @@ $(document).ready(function() {
             '<h3>New Progress</h3>' +
             '<form>' +
             '<div class="form-group">' +
-            '<label>New Accomplished</label>' +
+            '<label>Title</label>' +
             '<input type="text" class="form-control" placeholder="Card Name">' +
             '</div>' +
             '<div class="form-group">' +
@@ -173,10 +379,12 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        delBut.addEventListener("click", newData);
+        delBut.addEventListener("click", function() {
+            deleteData(newLi);
+        });
 
         saveBut.addEventListener('click', function() {
-            newData(newLi);
+            saveData(newLi);
         });
 
         $(".accordion").accordion({
@@ -209,10 +417,12 @@ $(document).ready(function() {
         const saveBut = newLi.querySelector("button.accordion-save-button");
         const delBut = newLi.querySelector("button.accordion-delete-button");
 
-        delBut.addEventListener("click", newData);
+        delBut.addEventListener("click", function() {
+            deleteData(newLi);
+        });
 
         saveBut.addEventListener('click', function() {
-            newData(newLi);
+            saveData(newLi);
         });
 
         $(".accordion").accordion({
