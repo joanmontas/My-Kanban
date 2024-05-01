@@ -49,9 +49,9 @@ function deleteData(li) {
     } else {
         // alert("OLD");
         path = path + liID;
-        const someRef = ref(db, path); // Replace with actual key
+        const dbRef = ref(db, path); // Replace with actual key
 
-        remove(someRef)
+        remove(dbRef)
             .then(() => {
                 console.log("Data deleted successfully!");
             })
@@ -62,6 +62,61 @@ function deleteData(li) {
     }
 
     li.remove();
+}
+
+function swapData(previousColumn, currentColumn, li) {
+    var liID = $(li).attr("id");
+    var ulID = $(li).parent().attr('id');
+
+    var userID = "sudo"; // TODO(Joan) ID should be unique user ID when they login - Joan
+
+    var path0 = "test";
+    path0 = path0 + "/" + userID;
+    path0 = path0 + "/" + previousColumn;
+
+
+    if (typeof liID === 'undefined') {
+        // alert("New");
+        return;
+    }
+
+    path0 = path0 + "/" + liID;
+    const dbRef0 = ref(db, path0);
+
+
+    get(dbRef0)
+        .then((snapshot) => {
+            const data = snapshot.val();
+            var path1 = "test";
+            path1 = path1 + "/" + userID;
+            path1 = path1 + "/" + currentColumn;
+            path1 = path1 + "/" + liID;
+            const dbRef1 = ref(db, path1);
+
+
+            set(dbRef1, data).then(() => {
+                console.log("Data added successfully! ", data);
+            }).catch((error) => {
+                alert("Error: Could not update card:" + error);
+            })
+
+            remove(dbRef0)
+                .then(() => {
+                    console.log("Data deleted successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error: Unable to delete data from db:", error);
+                });
+        })
+        .catch((error) => {
+            alert("Error: The current card does not exist in the database.");
+            return;
+        });
+
+
+
+
+
 }
 
 function saveData(li) {
@@ -93,7 +148,11 @@ function saveData(li) {
         push(dbRef, myData)
             .then((snapshot) => {
                 li.id = snapshot.key;
-                h3Element.text(inputVal);
+                h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
+                $(".accordion").accordion({
+                    collapsible: true,
+                    active: false
+                });
             })
             .catch((error) => {
                 console.error("Error: Unable to push data:", error);
@@ -106,7 +165,7 @@ function saveData(li) {
         get(dbRef).then((snapshot) => {
             if (snapshot.exists()) {
                 set(dbRef, myData).then(() => {
-                    h3Element.html(inputVal);
+                    h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
                 }).catch((error) => {
                     alert("Error: Could not update card:" + error);
                 })
@@ -117,6 +176,10 @@ function saveData(li) {
             alert("Error: Could not hadle updating values" + error);
         });
     }
+    $(".accordion").accordion({
+        collapsible: true,
+        active: false
+    });
 }
 
 function loadData() {
@@ -153,7 +216,7 @@ function loadData() {
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
-            h3Element.text(value["title"]);
+            h3Element.html(value["title"]);
 
             var textAreaVal = $(newLi).find('textarea');
             textAreaVal.text(value["detail"]);
@@ -213,7 +276,9 @@ function loadData() {
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
-            h3Element.text(value["title"]);
+            h3Element.html(value["title"]);
+
+
 
             var textAreaVal = $(newLi).find('textarea');
             textAreaVal.text(value["detail"]);
@@ -272,7 +337,7 @@ function loadData() {
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
-            h3Element.text(value["title"]);
+            h3Element.html(value["title"]);
 
             var textAreaVal = $(newLi).find('textarea');
             textAreaVal.text(value["detail"]);
@@ -442,9 +507,11 @@ $(document).ready(function() {
 
             var previousSortableColumn = $(ui.sender).attr('id');
 
-            var h3Element = li.find("h3");
-            h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') +
-                "FROM: " + previousSortableColumn + " TO: " + currentSortableColumn);
+            // var h3Element = li.find("h3");
+            // h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') +
+            //     "FROM: " + previousSortableColumn + " TO: " + currentSortableColumn);
+
+            swapData(previousSortableColumn, currentSortableColumn, li);
 
             $(".accordion").accordion({
                 collapsible: true,
