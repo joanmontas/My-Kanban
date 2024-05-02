@@ -370,7 +370,8 @@ $(document).ready(function() {
 
     $("ul.sortable").sortable({
         revert: true,
-        connectWith: ".sortable"
+        connectWith: ".sortable",
+        distance: 100 // increase usability in mobile app
     });
 
     $(".accordion").accordion({
@@ -416,7 +417,7 @@ $(document).ready(function() {
 
         $(".accordion").accordion({
             collapsible: true,
-            active: false
+            active: false,
         });
     });
 
@@ -464,7 +465,7 @@ $(document).ready(function() {
             '<h3>New Accomplished</h3>' +
             '<form>' +
             '<div class="form-group">' +
-            '<label>New Accomplished</label>' +
+            '<label>Title</label>' +
             '<input type="text" class="form-control" placeholder="Card Name">' +
             '</div>' +
             '<div class="form-group">' +

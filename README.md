@@ -29,6 +29,7 @@ Config.js should be included.
 |                    | Implement authentication. |
 |                    | Edit db security |
 |                    | Refactor |
+|                    | Reuse navbar across pages |
 | In prgresss        |    |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
