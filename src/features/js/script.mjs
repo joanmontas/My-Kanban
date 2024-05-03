@@ -31,3 +31,11 @@ import {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase();
+
+$(document).ready(function() {
+    $("#navBar").load("../navbar.html", function() {
+        $("#homeLink").attr("href", "../index.html");
+        $("#featuresLink").attr("href", "#");
+        $("#boardLink").attr("href", "../board/board.html");
+    });
+})

@@ -29,7 +29,6 @@ Config.js should be included.
 |                    | Implement authentication. |
 |                    | Edit db security |
 |                    | Refactor |
-|                    | Reuse navbar across pages |
 | In prgresss        |    |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
@@ -38,10 +37,12 @@ Config.js should be included.
 |                    | Create a '+' button to add TODO cards.          |
 |                    | Items should have accordion-like features.|
 |                    | Create form inside each accordion.       |
-|                    |  Add save button|
+|                    | Add save button|
 |                    | Place a delete button or check box in each accordion|
 |                    | Add buttons to each column and make their js function. |
 |                    | Research event, then handle for creation and being to another column.|
+|                    | Reuse navbar across pages |
+
 |                    | Initialize back end|
 |                    | Compartamentalize apps|
 |                    | Althought not necessary, hide the firebaseConfiguration via config.js|

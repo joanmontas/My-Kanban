@@ -18,22 +18,18 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-import {
-    getDatabase,
-    set,
-    get,
-    update,
-    remove,
-    ref,
-    child
-} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getDatabase();
+const auth = getAuth();
+auth.languageCode = "en";
+
+$("#navBar").load("../navbar.html", function() {
+    $("#homeLink").attr("href", "#");
+    $("#featuresLink").attr("href", "./features/features.html");
+    $("#boardLink").attr("href", "./board/board.html");
+});
 
 $(document).ready(function() {
-    const navBar = document.getElementById("navBar");
-    $("#navBar").load("../navbar.html");
+
 });
