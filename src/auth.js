@@ -24,29 +24,33 @@ const auth = getAuth();
 auth.languageCode = "en";
 const provider = new GoogleAuthProvider();
 
+$(document).ready(function() {
+    $("#navBar").load("../navbar.html", function() {
+        $("#homeLink").attr("href", "../index.html");
+        $("#featuresLink").attr("href", "#");
+        $("#boardLink").attr("href", "../board/board.html");
+    });
+})
 
-$("#navBar").load("../navbar.html", function() {
-    $("#homeLink").attr("href", "#");
-    $("#featuresLink").attr("href", "./features/features.html");
-    $("#boardLink").attr("href", "./board/board.html");
-});
 
-const signInn = async () => { // Use async for cleaner handling
+const signInn = async () => {
     try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         console.log("Successfully signInn", user);
+        location.reload(true);
     } catch (error) {
-        console.error("Error: Unable to signOutt ", error);
+        console.error("Error: Unable to signInn ", error);
     }
 };
 
 const signOutt = async () => {
     try {
         await signOut(auth);
-        console.log("successfully signout");
+        console.log("successfully signOutt");
+        location.reload(true);
     } catch (error) {
-        console.error("Error: Unable to signout ", error);
+        console.error("Error: Unable to signOutt ", error);
     }
 };
 
@@ -63,3 +67,12 @@ onAuthStateChanged(auth, (user) => {
         $("#loginLogoutButton").on("click", signInn);
     }
 });
+
+export {
+    app,
+    analytics,
+    auth,
+    signInn,
+    signOutt,
+    provider
+};

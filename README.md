@@ -27,8 +27,7 @@ Config.js should be included.
 |                    | Create features page explain functionality so far.|
 |                    | Add Date to the form.|
 |                    | Edit db security |
-|                    | Refactor |
-| In Progress        | Implement authentication. |
+| In Progress        |                  |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Items can be interchanged in different columns.|
@@ -41,7 +40,6 @@ Config.js should be included.
 |                    | Add buttons to each column and make their js function. |
 |                    | Research event, then handle for creation and being to another column.|
 |                    | Reuse navbar across pages |
-
 |                    | Initialize back end|
 |                    | Compartamentalize apps|
 |                    | Althought not necessary, hide the firebaseConfiguration via config.js|
@@ -53,7 +51,10 @@ Config.js should be included.
 |                    | Gather data from db on ready and display.|
 |                    | Delete card from the database using unique meta data ID. |
 |                    | Fix accordion's arrow upon dataSave. |
-| In prgresss        | Upon dragging to other column, update db.   |
+|                    | Upon dragging to other column, update db.   |
+|                    | Implement authentication. |
+|                    | Refactor Imports|
+
 
 
 
