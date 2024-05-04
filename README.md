@@ -54,6 +54,7 @@ Config.js should be included.
 |                    | Upon dragging to other column, update db.   |
 |                    | Implement authentication. |
 |                    | Refactor Imports|
+|                    | Authentication Based Path|
 
 
 

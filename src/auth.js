@@ -32,7 +32,6 @@ $(document).ready(function() {
     });
 })
 
-
 const signInn = async () => {
     try {
         const result = await signInWithPopup(auth, provider);
@@ -54,7 +53,6 @@ const signOutt = async () => {
     }
 };
 
-
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("logged", user);
@@ -68,11 +66,20 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+function getUserID() {
+    if (auth && auth.currentUser) {
+        return auth.currentUser.uid;
+    } else {
+        return null;
+    }
+}
+
 export {
     app,
     analytics,
     auth,
     signInn,
     signOutt,
-    provider
+    provider,
+    getUserID
 };
