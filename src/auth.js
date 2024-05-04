@@ -18,7 +18,6 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
@@ -63,9 +62,4 @@ onAuthStateChanged(auth, (user) => {
         $("#loginLogoutButton").text("Login");
         $("#loginLogoutButton").on("click", signInn);
     }
-});
-
-
-$(document).ready(function() {
-
 });

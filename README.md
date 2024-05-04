@@ -26,10 +26,9 @@ Config.js should be included.
 |                    | Better customize items functionality for better |
 |                    | Create features page explain functionality so far.|
 |                    | Add Date to the form.|
-|                    | Implement authentication. |
 |                    | Edit db security |
 |                    | Refactor |
-| In prgresss        |    |
+| In Progress        | Implement authentication. |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Items can be interchanged in different columns.|
