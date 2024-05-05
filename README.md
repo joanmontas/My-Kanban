@@ -27,7 +27,7 @@ Config.js should be included.
 |                    | Create features page explain functionality so far.|
 |                    | Add Date to the form.|
 |                    | Edit db security |
-| In Progress        |                  |
+| In Progress        | Research non-pop-up authentication             |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Items can be interchanged in different columns.|

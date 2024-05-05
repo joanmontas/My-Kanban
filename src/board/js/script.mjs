@@ -383,12 +383,6 @@ onAuthStateChanged(auth, () => {
     }
 });
 
-$("#navBar").load("../navbar.html", function() {
-    $("#homeLink").attr("href", "../index.html");
-    $("#featuresLink").attr("href", "../features/features.html");
-    $("#boardLink").attr("href", "#");
-});
-
 $("ul.sortable").sortable({
     revert: true,
     connectWith: ".sortable",
@@ -535,3 +529,11 @@ $(".sortable").sortable({
         });
     }
 }).disableSelection();
+
+$(document).ready(function() {
+    $("#navBar").load("../navbar.html", function() {
+        $("#homeLink").attr("href", "../../index.html");
+        $("#featuresLink").attr("href", "../features/features.html");
+        $("#boardLink").attr("href", "#");
+    });
+})

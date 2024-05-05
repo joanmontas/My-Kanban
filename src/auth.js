@@ -24,14 +24,6 @@ const auth = getAuth();
 auth.languageCode = "en";
 const provider = new GoogleAuthProvider();
 
-$(document).ready(function() {
-    $("#navBar").load("../navbar.html", function() {
-        $("#homeLink").attr("href", "../index.html");
-        $("#featuresLink").attr("href", "#");
-        $("#boardLink").attr("href", "../board/board.html");
-    });
-})
-
 const signInn = async () => {
     try {
         const result = await signInWithPopup(auth, provider);

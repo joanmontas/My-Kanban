@@ -10,6 +10,6 @@ import {
 
 $("#navBar").load("../navbar.html", function() {
     $("#homeLink").attr("href", "#");
-    $("#featuresLink").attr("href", "./features/features.html");
-    $("#boardLink").attr("href", "./board/board.html");
+    $("#featuresLink").attr("href", "features/features.html");
+    $("#boardLink").attr("href", "board/board.html");
 });
