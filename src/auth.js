@@ -54,7 +54,9 @@ onAuthStateChanged(auth, (user) => {
     } else {
         console.log("Not logged ");
         $("#loginLogoutButton").text("Login");
-        $("#loginLogoutButton").on("click", signInn);
+        $("#loginLogoutButton").on("click", function() {
+            window.location.href = "../../login/login.html";
+        });
     }
 });
 
