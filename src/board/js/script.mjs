@@ -9,7 +9,14 @@ import {
     signInn,
     signOutt,
     provider,
-    getUserID
+    getUserID,
+    db,
+    getDatabase,
+    set,
+    push,
+    get,
+    remove,
+    ref,
 } from "../../auth.js";
 
 import {
@@ -17,21 +24,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 
 import {
-    getDatabase,
-    set,
-    push,
-    get,
-    remove,
-    ref,
-} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-
-
-import {
-    onAuthStateChanged
+    onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-// Initialize Firebase
-const db = getDatabase();
 
 function deleteData(li) {
     // alert("delete!");
@@ -62,9 +57,7 @@ function deleteData(li) {
             .catch((error) => {
                 console.error("Error: Unable to delete data from db:", error);
             });
-
     }
-
     li.remove();
 }
 
@@ -509,16 +502,6 @@ $("#add_accomplished").click(function() {
         collapsible: true,
     });
 });
-
-// $("#add_kanban").click(function() {
-//     console.log("Clicked");
-//     const newLi = document.createElement("li");
-//     var newLiInner = '<div>asd</div>';
-//     newLi.innerHTML = newLiInner;
-//     $("#list_kanban").append(newLi);
-// });
-
-$(".kanbans").accordion();
 
 
 $("#add_kanban").click(function() {

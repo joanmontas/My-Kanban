@@ -26,11 +26,12 @@ Database security configuration
 |TODO                | Choose a style to be applied across the site. |
 |                    | Better customize items functionality for better |
 |                    | Create features page explain functionality so far.|
-|                    | Add a settings or "profile page".|
 |                    | replace logout button with drop down |
 |                    | Add anonymous authentication |
-|                    | Add Date to the form.|
-|                    | Add about page|
+|                    | Add Date to the form. |
+|                    | Add about page |
+|                    | Add user setting |
+|                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
 |                    | Upon user creation, first kanban should be created|
@@ -68,6 +69,9 @@ Database security configuration
 |                    | Board page should have side bar where new features will be added|
 |                    | Board sidebar should be dynamically added|
 |                    | Research modals, in order to modify side bar (or stick with same pattern, if so research events)|
+|                    | Setup Firebase Function|
+|                    | Upon user creation add a settings or "profile" in db.|
+
 
 
 
