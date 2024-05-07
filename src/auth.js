@@ -29,7 +29,7 @@ const signInn = async () => {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         console.log("Successfully signInn", user);
-        location.reload(true);
+        window.location.href = "../index.html";
     } catch (error) {
         console.error("Error: Unable to signInn ", error);
     }
@@ -39,7 +39,7 @@ const signOutt = async () => {
     try {
         await signOut(auth);
         console.log("successfully signOutt");
-        location.reload(true);
+        window.location.href = "../../index.html";
     } catch (error) {
         console.error("Error: Unable to signOutt ", error);
     }

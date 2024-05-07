@@ -3,6 +3,16 @@
 // License under GNU General Public License v3.0
 
 import {
+    app,
+    analytics,
+    auth,
+    signInn,
+    signOutt,
+    provider,
+    getUserID
+} from "../../auth.js";
+
+import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 
@@ -15,15 +25,6 @@ import {
     ref,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
-import {
-    app,
-    analytics,
-    auth,
-    signInn,
-    signOutt,
-    provider,
-    getUserID
-} from "../../auth.js";
 
 import {
     onAuthStateChanged
@@ -153,7 +154,7 @@ function saveData(li) {
             .then((snapshot) => {
                 li.id = snapshot.key;
                 h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
-                $(".accordion").accordion({
+                $(".kanbanCard").accordion({
                     collapsible: true,
                     active: false
                 });
@@ -180,7 +181,7 @@ function saveData(li) {
             alert("Error: Could not hadle updating values" + error);
         });
     }
-    $(".accordion").accordion({
+    $(".kanbanCard").accordion({
         collapsible: true,
         active: false
     });
@@ -205,7 +206,7 @@ function loadData() {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion">' +
+            var newLiInner = '<div class="accordion kanbanCard">' +
                 '<h3>New TODO</h3>' +
                 '<form>' +
                 '<div class="form-group">' +
@@ -247,7 +248,7 @@ function loadData() {
             $("#todo_sortable").append(newLi);
         }
 
-        $(".accordion").accordion({
+        $(".kanbanCard").accordion({
             collapsible: true,
             active: false
         });
@@ -265,7 +266,7 @@ function loadData() {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion">' +
+            var newLiInner = '<div class="accordion kanbanCard">' +
                 '<h3>New TODO</h3>' +
                 '<form>' +
                 '<div class="form-group">' +
@@ -308,7 +309,7 @@ function loadData() {
             $("#in_progress_sortable").append(newLi);
         }
 
-        $(".accordion").accordion({
+        $(".kanbanCard").accordion({
             collapsible: true,
             active: false
         });
@@ -326,7 +327,7 @@ function loadData() {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion">' +
+            var newLiInner = '<div class="accordion kanbanCard">' +
                 '<h3>New TODO</h3>' +
                 '<form>' +
                 '<div class="form-group">' +
@@ -367,7 +368,7 @@ function loadData() {
             $("#accomplished_sortable").append(newLi);
         }
 
-        $(".accordion").accordion({
+        $(".kanbanCard").accordion({
             collapsible: true,
             active: false
         });
@@ -383,22 +384,22 @@ onAuthStateChanged(auth, () => {
     }
 });
 
-$("ul.sortable").sortable({
-    revert: true,
-    connectWith: ".sortable",
-    distance: 100
-});
+// $("ul.sortable").sortable({
+//     revert: true,
+//     connectWith: ".sortable",
+//     distance: 100
+// });
 
-$(".accordion").accordion({
-    collapsible: true,
-    active: false
-});
+// $(".accordion").accordion({
+//     collapsible: true,
+//     active: false
+// });
 
-$("ul, li").disableSelection();
+// $("ul, li").disableSelection();  
 
 $("#add_todo").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion">' +
+    var newLiInner = '<div class="accordion kanbanCard">' +
         '<h3>New TODO</h3>' +
         '<form>' +
         '<div class="form-group">' +
@@ -428,7 +429,7 @@ $("#add_todo").click(function() {
         saveData(newLi);
     });
 
-    $(".accordion").accordion({
+    $(".kanbanCard").accordion({
         collapsible: true,
         active: false,
     });
@@ -436,7 +437,7 @@ $("#add_todo").click(function() {
 
 $("#add_in_progress").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion">' +
+    var newLiInner = '<div class="accordion kanbanCard">' +
         '<h3>New Progress</h3>' +
         '<form>' +
         '<div class="form-group">' +
@@ -466,7 +467,7 @@ $("#add_in_progress").click(function() {
         saveData(newLi);
     });
 
-    $(".accordion").accordion({
+    $(".kanbanCard").accordion({
         collapsible: true,
         active: false
     });
@@ -474,7 +475,7 @@ $("#add_in_progress").click(function() {
 
 $("#add_accomplished").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion">' +
+    var newLiInner = '<div class="accordion kanbanCard">' +
         '<h3>New Accomplished</h3>' +
         '<form>' +
         '<div class="form-group">' +
@@ -504,7 +505,61 @@ $("#add_accomplished").click(function() {
         saveData(newLi);
     });
 
-    $(".accordion").accordion({
+    $(".kanbanCard").accordion({
+        collapsible: true,
+    });
+});
+
+// $("#add_kanban").click(function() {
+//     console.log("Clicked");
+//     const newLi = document.createElement("li");
+//     var newLiInner = '<div>asd</div>';
+//     newLi.innerHTML = newLiInner;
+//     $("#list_kanban").append(newLi);
+// });
+
+$(".kanbans").accordion();
+
+
+$("#add_kanban").click(function() {
+    const newLi = document.createElement("li");
+    var newLiInner = '<div class="accordion kanbans">' +
+        '<h3>New Kanban</h3>' +
+        '<form>' +
+        '<div class="form-group">' +
+        '<label>Title</label>' +
+        '<input type="text" class="form-control" placeholder="Card Name">' +
+        '</div>' +
+        '<div class="form-group">' +
+        '<label>Detail</label>' +
+        '<textarea class="form-control" rows="3"></textarea>' +
+        '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+        '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+        '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
+        '</div>' +
+        '</form>' +
+        '</div>';
+    newLi.innerHTML = newLiInner;
+
+    $("#list_kanban").append(newLi);
+
+    const saveBut = newLi.querySelector("button.accordion-save-button");
+    const delBut = newLi.querySelector("button.accordion-delete-button");
+    const loadBut = newLi.querySelector("button.accordion-load-button");
+
+    delBut.addEventListener("click", function() {
+        deleteData(newLi);
+    });
+
+    saveBut.addEventListener('click', function() {
+        saveData(newLi);
+    });
+
+    loadBut.addEventListener('click', function() {
+        loadData();
+    });
+
+    $(".kanbans").accordion({
         collapsible: true,
         active: false
     });
@@ -523,7 +578,7 @@ $(".sortable").sortable({
 
         swapData(previousSortableColumn, currentSortableColumn, li);
 
-        $(".accordion").accordion({
+        $(".kanbanCard").accordion({
             collapsible: true,
             active: false
         });

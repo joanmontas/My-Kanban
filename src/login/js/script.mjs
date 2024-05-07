@@ -52,6 +52,11 @@ $("#logInButton").click(function(event) {
         });
 });
 
+$("#continueWithGoogleButton").click(function(event) {
+    event.preventDefault();
+    signInn();
+});
+
 $("#navBar").load("../../navbar.html", function() {
     $("#homeLink").attr("href", "../../index.html");
     $("#featuresLink").attr("href", "../../features/features.html");

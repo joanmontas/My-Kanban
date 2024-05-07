@@ -22,34 +22,37 @@
 
     <div id="navBar"></div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-md-3 col-sm-4">
+                <p>Kanbans</p>
+                <ul class="rounded " id="list_kanban">
+                </ul>
+                <div class="list-controls">
+                    <button type="button" class="btn btn-primary" id="add_kanban">Kanban +</button>
+                </div>
+            </div>
+            <div class=" col-md-3 col-sm-4">
                 <p>TODO</p>
                 <ul class="sortable" id="todo_sortable">
-                    <!-- Dynamically Add TODO -->
                 </ul>
                 <button type="button" class="btn btn-primary" id="add_todo">TODO +</button>
             </div>
-            <div class="col-sm">
+            <div class="col-md-3 col-sm-4">
                 <p>In-Progress</p>
                 <ul class="sortable" id="in_progress_sortable">
-                    <!-- Dynamically Add Progress -->
                 </ul>
                 <button type="button" class="btn btn-primary" id="add_in_progress">Progress +</button>
-
             </div>
-
-            <div class="col-sm">
+            <div class="col-md-3 col-sm-4">
                 <p>Accomplished</p>
                 <ul class="sortable" id="accomplished_sortable">
-                    <!-- Dynamically Add Accomplished -->
                 </ul>
                 <button type="button" class="btn btn-primary" id="add_accomplished">Accomplished +</button>
-
             </div>
         </div>
     </div>
+
 
     <!-- cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -59,7 +62,6 @@
     <!-- mine -->
     <script src="../config.js"></script>
     <script src="./js/script.mjs" type="module"></script>
-
 
 </body>
 

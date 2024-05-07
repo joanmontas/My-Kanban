@@ -17,6 +17,7 @@ Config.js should be included.
         measurementId: <>
     };
 ```
+Database security configuration 
 
 ### My-Kanban's Kanban Board
 
@@ -25,11 +26,16 @@ Config.js should be included.
 |TODO                | Choose a style to be applied across the site. |
 |                    | Better customize items functionality for better |
 |                    | Create features page explain functionality so far.|
+|                    | Add a settings or "profile page".|
+|                    | replace logout button with drop down |
+|                    | Add anonymous authentication |
 |                    | Add Date to the form.|
-|                    | Edit db security |
-| In Progress        | Research non-pop-up authentication             |
+|                    | Add about page|
+|                    | Automatically save cards upon add|
+|                    | Add visual cue upon add|
+|                    | Upon user creation, first kanban should be created|
+| In Progress        | |
 | Accomplished       | Break down board into 3 categories             |
-|                    | Items can be interchanged in different columns.|
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |
 |                    | Create a '+' button to add TODO cards.          |
@@ -55,8 +61,13 @@ Config.js should be included.
 |                    | Implement authentication. |
 |                    | Refactor Imports|
 |                    | Authentication Based Path|
-
-
+|                    | Research non-pop-up authentication             |
+|                    | Login Page With Google and Email+Pass          |
+|                    | Edit db security |
+|                    | Pad navbar |
+|                    | Board page should have side bar where new features will be added|
+|                    | Board sidebar should be dynamically added|
+|                    | Research modals, in order to modify side bar (or stick with same pattern, if so research events)|
 
 
 

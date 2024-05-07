@@ -28,3 +28,7 @@ li {
 #accomplished_sortable {
     background-color: #68d311;
 }
+
+.navbar {
+    padding: 1rem 1rem;
+}

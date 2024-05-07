@@ -4,6 +4,8 @@
     License under GNU General Public License v3.0 ul
 */
 
+@import "../../css/style.css";
+
 ul {
     list-style-type: none;
     margin: 0;
