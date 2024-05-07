@@ -88,12 +88,11 @@ async function registerNewUser() {
         })
         .catch((error) => {
             alert("Error: Could not gather user information" + error);
-            // Handle the error here (log, retry, etc.) -  don't re-throw by default
         });
 }
 
 function createOwnKanban() {
-
+    // TODO() create a sample kanban for user to interact
 }
 
 onAuthStateChanged(auth, (user) => {
