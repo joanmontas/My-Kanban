@@ -27,7 +27,6 @@ import {
     onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-
 function deleteData(li) {
     // alert("delete!");
 
@@ -115,6 +114,7 @@ function swapData(previousColumn, currentColumn, li) {
 }
 
 function saveData(li) {
+    // TODO(Joan) Modify to be save in the right kanban - Joan
     var liID = $(li).attr("id");
     var ulID = $(li).parent().attr('id');
 
@@ -180,7 +180,71 @@ function saveData(li) {
     });
 }
 
+function loadBoards() {
+    var userID = getUserID();
+
+    if (!userID) {
+        return;
+    }
+
+    var path0 = userID + "/personalKanbans";
+
+    const dbRef0 = ref(db, path0);
+
+    get(dbRef0).then((snapshot) => {
+        const data = snapshot.val();
+
+        for (const key in data) {
+            const value = data[key];
+            const newLi = document.createElement("li");
+            var newLiInner = '<div class="accordion kanbans">' +
+                '<h3>New Kanban</h3>' +
+                '<form>' +
+                '<div class="form-group">' +
+                '<label>Title</label>' +
+                '<input type="text" class="form-control" placeholder="Card Name">' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Detail</label>' +
+                '<textarea class="form-control" rows="3"></textarea>' +
+                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+                '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
+                '</div>' +
+                '</form>' +
+                '</div>';
+            newLi.innerHTML = newLiInner;
+
+            $("#list_kanban").append(newLi);
+
+            const saveBut = newLi.querySelector("button.accordion-save-button");
+            const delBut = newLi.querySelector("button.accordion-delete-button");
+            const loadBut = newLi.querySelector("button.accordion-load-button");
+
+            delBut.addEventListener("click", function() {
+                deleteData(newLi);
+            });
+
+            saveBut.addEventListener('click', function() {
+                saveData(newLi);
+            });
+
+            loadBut.addEventListener('click', function() {
+                // TODO(Joan) Give path to be loaded - Joan
+                loadData();
+            });
+        }
+
+        $(".kanbans").accordion({
+            collapsible: true,
+            active: false
+        });
+    });
+
+}
+
 function loadData() {
+    // TODO(Joan) Modify to load specified kanban - Joan
     var userID = getUserID();
 
     if (!userID) {
@@ -367,28 +431,16 @@ function loadData() {
         });
     });
 }
+
 onAuthStateChanged(auth, () => {
     const userID = getUserID();
     if (userID) {
         console.log("looged ", userID);
-        loadData();
+        loadBoards();
     } else {
         console.log("not logged")
     }
 });
-
-// $("ul.sortable").sortable({
-//     revert: true,
-//     connectWith: ".sortable",
-//     distance: 100
-// });
-
-// $(".accordion").accordion({
-//     collapsible: true,
-//     active: false
-// });
-
-// $("ul, li").disableSelection();  
 
 $("#add_todo").click(function() {
     const newLi = document.createElement("li");

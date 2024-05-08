@@ -83,7 +83,7 @@ async function registerNewUser() {
                 }).catch((error) => {
                     alert("Error: Could not register user:" + error);
                 })
-                var firstKanbanPath = getUserID() + "/personalKanbans/";
+                createOwnKanban();
             }
         })
         .catch((error) => {
@@ -93,6 +93,24 @@ async function registerNewUser() {
 
 function createOwnKanban() {
     // TODO() create a sample kanban for user to interact
+    var id = getUserID();
+    if (!id) {
+        console.log("ERROR: createOwnKanban unable to find id");
+        return;
+    }
+    var path = id + "/personalKanbans"
+    const myData = {
+        title: "Your First Board",
+        detail: "In here you are welcome to explore the funcitonalities.",
+    };
+    const dbRef = ref(db, path);
+    push(dbRef, myData)
+        .then((snapshot) => {
+            // Create kanban
+        })
+        .catch((error) => {
+            console.error("Error: Unable to push data:", error);
+        });
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -105,7 +123,7 @@ onAuthStateChanged(auth, (user) => {
         }
         $("#loginLogoutButton").text("Logout");
         $("#loginLogoutButton").on("click", signOutt);
-
+        $('#boardLink').toggle();
     } else {
         console.log("Not logged ");
         $("#loginLogoutButton").text("Login");

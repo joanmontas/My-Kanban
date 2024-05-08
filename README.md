@@ -34,7 +34,7 @@ Database security configuration
 |                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
-|                    | Upon user creation, first kanban should be created|
+|                    | Update load kanban function|
 | In Progress        | |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
@@ -71,6 +71,9 @@ Database security configuration
 |                    | Research modals, in order to modify side bar (or stick with same pattern, if so research events)|
 |                    | Setup Firebase Function|
 |                    | Upon user creation add a settings or "profile" in db.|
+|                    | Upon user creation, first kanban should be created|
+|                    | Hide board. Upon login show board|
+
 
 
 

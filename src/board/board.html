@@ -21,9 +21,18 @@
 <body>
 
     <div id="navBar"></div>
-
     <div class="container-fluid">
-        <div class="row">
+        <!-- TODO(Joan) Jazz this up, its looking plain - Joan -->
+        <div class="row" id="boardDisplay">
+            <div class="col-md-3 col-sm-4"></div>
+            <div class="col-md-3 col-sm-4">
+                <h1 class="bold">Please Load A Kanban</h1>
+            </div>
+            <div class="col-md-3 col-sm-4"></div>
+        </div>
+    </div>
+    <div class=" container-fluid">
+        <div class="row" id="boardDisplay">
             <div class="col-md-3 col-sm-4">
                 <p>Kanbans</p>
                 <ul class="rounded " id="list_kanban">
@@ -32,19 +41,19 @@
                     <button type="button" class="btn btn-primary" id="add_kanban">Kanban +</button>
                 </div>
             </div>
-            <div class=" col-md-3 col-sm-4">
+            <div class=" col-md-3 col-sm-4" style="display: none" id="todo_sortable_div">
                 <p>TODO</p>
                 <ul class="sortable" id="todo_sortable">
                 </ul>
                 <button type="button" class="btn btn-primary" id="add_todo">TODO +</button>
             </div>
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-4" style="display: none" id="in_progress_sortable_div">
                 <p>In-Progress</p>
-                <ul class="sortable" id="in_progress_sortable">
+                <ul class=" sortable" id="in_progress_sortable">
                 </ul>
                 <button type="button" class="btn btn-primary" id="add_in_progress">Progress +</button>
             </div>
-            <div class="col-md-3 col-sm-4">
+            <div class="col-md-3 col-sm-4" id="accomplished_sortable_div" style="display: none">
                 <p>Accomplished</p>
                 <ul class="sortable" id="accomplished_sortable">
                 </ul>
