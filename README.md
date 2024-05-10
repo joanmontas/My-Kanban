@@ -31,7 +31,10 @@ Database security configuration
 |                    | Add Date to the form. |
 |                    | Add about page |
 |                    | Add user setting |
-|                    | Make functions that rely on db async, and use await when calling them |
+|                    | Make functions that rely on db async, and use await when 
+|                    | Modify saveData  |
+
+calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
 |                    | Update load kanban function|

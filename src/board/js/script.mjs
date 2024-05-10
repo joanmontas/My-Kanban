@@ -27,7 +27,8 @@ import {
     onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
-function deleteData(li) {
+function deleteCardData(li) {
+    // TODO(Joan) Modify to reflect current kanban - Joan
     // alert("delete!");
 
     var liID = $(li).attr("id");
@@ -60,7 +61,8 @@ function deleteData(li) {
     li.remove();
 }
 
-function swapData(previousColumn, currentColumn, li) {
+function swapCardsData(previousColumn, currentColumn, li) {
+    // TODO(Joan) Modify to reflect current kanban - Joan
     var liID = $(li).attr("id");
     var ulID = $(li).parent().attr('id');
 
@@ -113,7 +115,7 @@ function swapData(previousColumn, currentColumn, li) {
         });
 }
 
-function saveData(li) {
+function saveCardData(li, kanbanID) {
     // TODO(Joan) Modify to be save in the right kanban - Joan
     var liID = $(li).attr("id");
     var ulID = $(li).parent().attr('id');
@@ -180,79 +182,16 @@ function saveData(li) {
     });
 }
 
-function loadBoards() {
-    var userID = getUserID();
-
-    if (!userID) {
-        return;
-    }
-
-    var path0 = userID + "/personalKanbans";
-
-    const dbRef0 = ref(db, path0);
-
-    get(dbRef0).then((snapshot) => {
-        const data = snapshot.val();
-
-        for (const key in data) {
-            const value = data[key];
-            const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion kanbans">' +
-                '<h3>New Kanban</h3>' +
-                '<form>' +
-                '<div class="form-group">' +
-                '<label>Title</label>' +
-                '<input type="text" class="form-control" placeholder="Card Name">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Detail</label>' +
-                '<textarea class="form-control" rows="3"></textarea>' +
-                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-                '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
-                '</div>' +
-                '</form>' +
-                '</div>';
-            newLi.innerHTML = newLiInner;
-
-            $("#list_kanban").append(newLi);
-
-            const saveBut = newLi.querySelector("button.accordion-save-button");
-            const delBut = newLi.querySelector("button.accordion-delete-button");
-            const loadBut = newLi.querySelector("button.accordion-load-button");
-
-            delBut.addEventListener("click", function() {
-                deleteData(newLi);
-            });
-
-            saveBut.addEventListener('click', function() {
-                saveData(newLi);
-            });
-
-            loadBut.addEventListener('click', function() {
-                // TODO(Joan) Give path to be loaded - Joan
-                loadData();
-            });
-        }
-
-        $(".kanbans").accordion({
-            collapsible: true,
-            active: false
-        });
-    });
-
-}
-
-function loadData() {
+function loadCardData(kanbanID) {
     // TODO(Joan) Modify to load specified kanban - Joan
+    // TODO(Joan) unhide the kanban columns
     var userID = getUserID();
 
     if (!userID) {
         return;
     }
 
-    var path0 = "";
-    path0 = path0 + userID + "/";
+    var path0 = userID + "/" + kanbanID + "/" + "cards/";
     path0 = path0 + "todo_sortable";
 
     const dbRef0 = ref(db, path0);
@@ -294,11 +233,11 @@ function loadData() {
             const delBut = newLi.querySelector("button.accordion-delete-button");
 
             delBut.addEventListener("click", function() {
-                deleteData(newLi);
+                deleteCardData(newLi);
             });
 
             saveBut.addEventListener('click', function() {
-                saveData(newLi);
+                saveCardData(newLi);
             });
 
 
@@ -311,8 +250,7 @@ function loadData() {
         });
     });
 
-    var path1 = "";
-    path1 = path1 + userID + "/";
+    var path1 = userID + "/" + kanbanID + "/" + "cards/";
     path1 = path1 + "in_progress_sortable";
 
     const dbRef1 = ref(db, path1);
@@ -356,11 +294,11 @@ function loadData() {
             const delBut = newLi.querySelector("button.accordion-delete-button");
 
             delBut.addEventListener("click", function() {
-                deleteData(newLi);
+                deleteCardData(newLi);
             });
 
             saveBut.addEventListener('click', function() {
-                saveData(newLi);
+                saveCardData(newLi);
             });
 
             $("#in_progress_sortable").append(newLi);
@@ -372,8 +310,7 @@ function loadData() {
         });
     });
 
-    var path2 = "";
-    path2 = path2 + userID + "/";
+    var path2 = userID + "/" + kanbanID + "/" + "cards/";
     path2 = path2 + "accomplished_sortable";
 
     const dbRef2 = ref(db, path2);
@@ -415,17 +352,90 @@ function loadData() {
             const delBut = newLi.querySelector("button.accordion-delete-button");
 
             delBut.addEventListener("click", function() {
-                deleteData(newLi);
+                deleteCardData(newLi);
             });
 
             saveBut.addEventListener('click', function() {
-                saveData(newLi);
+                saveCardData(newLi);
             });
 
             $("#accomplished_sortable").append(newLi);
         }
 
         $(".kanbanCard").accordion({
+            collapsible: true,
+            active: false
+        });
+    });
+}
+
+function loadBoards() {
+    var userID = getUserID();
+
+    if (!userID) {
+        return;
+    }
+
+    var path0 = userID + "/personalKanbans";
+
+    const dbRef0 = ref(db, path0);
+
+    get(dbRef0).then((snapshot) => {
+        const data = snapshot.val();
+
+        for (const key in data) {
+            const value = data[key];
+            const newLi = document.createElement("li");
+            var newLiInner = '<div class="accordion kanbans">' +
+                '<h3>New Kanban</h3>' +
+                '<form>' +
+                '<div class="form-group">' +
+                '<label>Title</label>' +
+                '<input type="text" class="form-control" placeholder="Card Name">' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Detail</label>' +
+                '<textarea class="form-control" rows="3"></textarea>' +
+                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+                '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
+                '</div>' +
+                '</form>' +
+                '</div>';
+            newLi.innerHTML = newLiInner;
+
+            newLi.id = key;
+            var h3Element = $(newLi).find('h3');
+            h3Element.html(value["title"]);
+
+            var textAreaVal = $(newLi).find('textarea');
+            textAreaVal.text(value["detail"]);
+
+            var inputVal = $(newLi).find("input");
+            inputVal.val(value["title"]);
+            $("#list_kanban").append(newLi);
+
+            const saveBut = newLi.querySelector("button.accordion-save-button");
+            const delBut = newLi.querySelector("button.accordion-delete-button");
+            const loadBut = newLi.querySelector("button.accordion-load-button");
+
+            delBut.addEventListener("click", function() {
+                // TODO(Joan) Modify for the right path - Joan
+                deleteCardData(newLi);
+            });
+
+            saveBut.addEventListener('click', function() {
+                // TODO(Joan) Modify for the right path - Joan
+                saveCardData(newLi);
+            });
+
+            loadBut.addEventListener('click', function() {
+                // TODO(Joan) Give path to be loaded - Joan
+                loadCardData(key);
+            });
+        }
+
+        $(".kanbans").accordion({
             collapsible: true,
             active: false
         });
@@ -467,11 +477,11 @@ $("#add_todo").click(function() {
     const delBut = newLi.querySelector("button.accordion-delete-button");
 
     delBut.addEventListener("click", function() {
-        deleteData(newLi);
+        deleteCardData(newLi);
     });
 
     saveBut.addEventListener('click', function() {
-        saveData(newLi);
+        saveCardData(newLi);
     });
 
     $(".kanbanCard").accordion({
@@ -505,11 +515,11 @@ $("#add_in_progress").click(function() {
     const delBut = newLi.querySelector("button.accordion-delete-button");
 
     delBut.addEventListener("click", function() {
-        deleteData(newLi);
+        deleteCardData(newLi);
     });
 
     saveBut.addEventListener('click', function() {
-        saveData(newLi);
+        saveCardData(newLi);
     });
 
     $(".kanbanCard").accordion({
@@ -543,11 +553,11 @@ $("#add_accomplished").click(function() {
     const delBut = newLi.querySelector("button.accordion-delete-button");
 
     delBut.addEventListener("click", function() {
-        deleteData(newLi);
+        deleteCardData(newLi);
     });
 
     saveBut.addEventListener('click', function() {
-        saveData(newLi);
+        saveCardData(newLi);
     });
 
     $(".kanbanCard").accordion({
@@ -557,6 +567,7 @@ $("#add_accomplished").click(function() {
 
 
 $("#add_kanban").click(function() {
+    // TODO(Joan) Automatically save the kanban uppon add - Joan
     const newLi = document.createElement("li");
     var newLiInner = '<div class="accordion kanbans">' +
         '<h3>New Kanban</h3>' +
@@ -583,15 +594,18 @@ $("#add_kanban").click(function() {
     const loadBut = newLi.querySelector("button.accordion-load-button");
 
     delBut.addEventListener("click", function() {
-        deleteData(newLi);
+        // TODO(Joan) Modify for the right board path - Joan
+        deleteCardData(newLi);
     });
 
     saveBut.addEventListener('click', function() {
-        saveData(newLi);
+        // TODO(Joan) Modify for the right board path - Joan
+        saveCardData(newLi);
     });
 
     loadBut.addEventListener('click', function() {
-        loadData();
+        // TODO(Joan) Modify for the right board path - Joan
+        loadCardData(null);
     });
 
     $(".kanbans").accordion({
@@ -599,6 +613,70 @@ $("#add_kanban").click(function() {
         active: false
     });
 });
+
+function saveBoardData(li) {
+    var liID = $(li).attr("id");
+    var ulID = "";
+
+    var userID = getUserID();
+    if (!userID) {
+        return;
+    }
+
+    var path = userID + "/personalKanbans";
+
+    var h3Element = $(li).find('h3');
+    var textAreaVal = $(li).find('textarea').val();
+
+    const inputVal = $(li).find('input').val();
+
+    const myData = {
+        title: inputVal,
+        detail: textAreaVal,
+    };
+
+    console.log(textAreaVal);
+    console.log(inputVal);
+
+    if (typeof liID === 'undefined') {
+        // alert("New");
+        const dbRef = ref(db, path);
+        push(dbRef, myData)
+            .then((snapshot) => {
+                li.id = snapshot.key;
+                h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
+                $(".kanbanCard").accordion({
+                    collapsible: true,
+                    active: false
+                });
+            })
+            .catch((error) => {
+                console.error("Error: Unable to push data:", error);
+            });
+    } else {
+        // alert("OLD");
+        path = path + "/" + liID;
+        const dbRef = ref(db, path);
+
+        get(dbRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                set(dbRef, myData).then(() => {
+                    h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
+                }).catch((error) => {
+                    alert("Error: Could not update card:" + error);
+                })
+            } else {
+                alert("Error: The current card does not exist in the database.");
+            }
+        }).catch((error) => {
+            alert("Error: Could not hadle updating values" + error);
+        });
+    }
+    $(".kanbanCard").accordion({
+        collapsible: true,
+        active: false
+    });
+}
 
 $(".sortable").sortable({
     connectWith: ".sortable",
@@ -611,7 +689,7 @@ $(".sortable").sortable({
 
         var previousSortableColumn = $(ui.sender).attr('id');
 
-        swapData(previousSortableColumn, currentSortableColumn, li);
+        swapCardsData(previousSortableColumn, currentSortableColumn, li);
 
         $(".kanbanCard").accordion({
             collapsible: true,
