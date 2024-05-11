@@ -115,13 +115,17 @@ function swapCardsData(previousColumn, currentColumn, li) {
         });
 }
 
-function saveCardData(li, kanbanID) {
+function saveCardData(li, kanban) {
     // TODO(Joan) Modify to be save in the right kanban - Joan
     var liID = $(li).attr("id");
-    var ulID = $(li).parent().attr('id');
+    var ulID = kanban.id;
 
     var userID = getUserID();
     if (!userID) {
+        return;
+    }
+
+    if (!ulID) {
         return;
     }
 
@@ -182,7 +186,7 @@ function saveCardData(li, kanbanID) {
     });
 }
 
-function loadCardData(kanbanID) {
+function loadCardData(kanban) {
     // TODO(Joan) Modify to load specified kanban - Joan
     // TODO(Joan) unhide the kanban columns
     var userID = getUserID();
@@ -191,7 +195,14 @@ function loadCardData(kanbanID) {
         return;
     }
 
-    var path0 = userID + "/" + kanbanID + "/" + "cards/";
+    if (!kanban.id) {
+        // TODO(Joan) Replace notice saying kanban has not yet been saved - Joan
+        return;
+    }
+
+    console.log("kanban id: " + kanban.id);
+
+    var path0 = userID + "/" + kanban.id + "/" + "cards/";
     path0 = path0 + "todo_sortable";
 
     const dbRef0 = ref(db, path0);
@@ -240,7 +251,6 @@ function loadCardData(kanbanID) {
                 saveCardData(newLi);
             });
 
-
             $("#todo_sortable").append(newLi);
         }
 
@@ -250,7 +260,7 @@ function loadCardData(kanbanID) {
         });
     });
 
-    var path1 = userID + "/" + kanbanID + "/" + "cards/";
+    var path1 = userID + "/" + kanban.id + "/" + "cards/";
     path1 = path1 + "in_progress_sortable";
 
     const dbRef1 = ref(db, path1);
@@ -310,7 +320,7 @@ function loadCardData(kanbanID) {
         });
     });
 
-    var path2 = userID + "/" + kanbanID + "/" + "cards/";
+    var path2 = userID + "/" + kanban.id + "/" + "cards/";
     path2 = path2 + "accomplished_sortable";
 
     const dbRef2 = ref(db, path2);
@@ -426,12 +436,12 @@ function loadBoards() {
 
             saveBut.addEventListener('click', function() {
                 // TODO(Joan) Modify for the right path - Joan
-                saveCardData(newLi);
+                saveBoardData(newLi);
             });
 
             loadBut.addEventListener('click', function() {
                 // TODO(Joan) Give path to be loaded - Joan
-                loadCardData(key);
+                loadCardData(newLi);
             });
         }
 
@@ -594,18 +604,16 @@ $("#add_kanban").click(function() {
     const loadBut = newLi.querySelector("button.accordion-load-button");
 
     delBut.addEventListener("click", function() {
-        // TODO(Joan) Modify for the right board path - Joan
-        deleteCardData(newLi);
+        deleteBoardData(newLi);
     });
 
     saveBut.addEventListener('click', function() {
-        // TODO(Joan) Modify for the right board path - Joan
-        saveCardData(newLi);
+        saveBoardData(newLi);
     });
 
     loadBut.addEventListener('click', function() {
         // TODO(Joan) Modify for the right board path - Joan
-        loadCardData(null);
+        loadCardData(newLi);
     });
 
     $(".kanbans").accordion({
@@ -616,7 +624,6 @@ $("#add_kanban").click(function() {
 
 function saveBoardData(li) {
     var liID = $(li).attr("id");
-    var ulID = "";
 
     var userID = getUserID();
     if (!userID) {
@@ -645,7 +652,7 @@ function saveBoardData(li) {
             .then((snapshot) => {
                 li.id = snapshot.key;
                 h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
-                $(".kanbanCard").accordion({
+                $(".kanban").accordion({
                     collapsible: true,
                     active: false
                 });
@@ -672,10 +679,42 @@ function saveBoardData(li) {
             alert("Error: Could not hadle updating values" + error);
         });
     }
-    $(".kanbanCard").accordion({
+    $(".kanbans").accordion({
         collapsible: true,
         active: false
     });
+}
+
+function deleteBoardData(li) {
+    // TODO(Joan) Modify to reflect current kanban - Joan
+    // alert("delete!");
+
+    var liID = $(li).attr("id");
+    var ulID = $(li).parent().attr('id');
+
+    var userID = getUserID();
+    if (!userID) {
+        return;
+    }
+
+    var path = userID + "/personalKanbans/";
+
+    if (typeof liID === 'undefined') {
+        // alert("New");
+    } else {
+        // alert("OLD");
+        path = path + liID;
+        const dbRef = ref(db, path);
+
+        remove(dbRef)
+            .then(() => {
+                console.log("Data deleted successfully!");
+            })
+            .catch((error) => {
+                console.error("Error: Unable to delete data from db:", error);
+            });
+    }
+    li.remove();
 }
 
 $(".sortable").sortable({
