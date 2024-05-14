@@ -31,13 +31,10 @@ Database security configuration
 |                    | Add Date to the form. |
 |                    | Add about page |
 |                    | Add user setting |
-|                    | Make functions that rely on db async, and use await when 
-|                    | Modify saveData  |
-
-calling them |
+|                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
-|                    | Update load kanban function|
+|                    | save and deleteCardData should pull data from the correct     board path|
 | In Progress        | |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
@@ -76,6 +73,11 @@ calling them |
 |                    | Upon user creation add a settings or "profile" in db.|
 |                    | Upon user creation, first kanban should be created|
 |                    | Hide board. Upon login show board|
+|                    | create saveBoardData  |
+|                    | create deleteBoardData  |
+|                    | Update loadBoard function to reflect save and delete board data|
+
+
 
 
 

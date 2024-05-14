@@ -199,6 +199,9 @@ function loadCardData(kanban) {
         // TODO(Joan) Replace notice saying kanban has not yet been saved - Joan
         return;
     }
+    $("#todo_sortable_div").css("display", "");
+    $("#in_progress_sortable_div").css("display", "");
+    $("#accomplished_sortable_div").css("display", "");
 
     console.log("kanban id: " + kanban.id);
 
@@ -431,7 +434,7 @@ function loadBoards() {
 
             delBut.addEventListener("click", function() {
                 // TODO(Joan) Modify for the right path - Joan
-                deleteCardData(newLi);
+                deleteBoardData(newLi);
             });
 
             saveBut.addEventListener('click', function() {
@@ -704,6 +707,7 @@ function deleteBoardData(li) {
     } else {
         // alert("OLD");
         path = path + liID;
+        console.log("Deleting board: ", path);
         const dbRef = ref(db, path);
 
         remove(dbRef)
