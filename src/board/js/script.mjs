@@ -27,6 +27,8 @@ import {
     onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
+var currentKanban = undefined;
+
 function deleteCardData(li) {
     // TODO(Joan) Modify to reflect current kanban - Joan
     // alert("delete!");
@@ -39,15 +41,18 @@ function deleteCardData(li) {
         return;
     }
 
-    var path = "";
-    path = path + "/" + userID;
-    path = path + "/" + ulID + "/";
+    if (!currentKanban) {
+        return;
+    }
+
+    var path = userID + "/personalKanbans/" + currentKanban + "/data/" + ulID + "/";
 
     if (typeof liID === 'undefined') {
         // alert("New");
     } else {
         // alert("OLD");
         path = path + liID;
+        console.log("Path being deleted:", path);
         const dbRef = ref(db, path);
 
         remove(dbRef)
@@ -115,10 +120,16 @@ function swapCardsData(previousColumn, currentColumn, li) {
         });
 }
 
-function saveCardData(li, kanban) {
+function saveCardData(li) {
     // TODO(Joan) Modify to be save in the right kanban - Joan
+    console.log("saving");
+
+    if (!currentKanban) {
+        return;
+    };
+
     var liID = $(li).attr("id");
-    var ulID = kanban.id;
+    var ulID = $(li).parent().attr('id');
 
     var userID = getUserID();
     if (!userID) {
@@ -129,9 +140,7 @@ function saveCardData(li, kanban) {
         return;
     }
 
-    var path = "";
-    path = path + "/" + userID;
-    path = path + "/" + ulID;
+    var path = userID + "/personalKanbans/" + currentKanban + "/data/" + ulID + "/";
 
     var h3Element = $(li).find('h3');
     var textAreaVal = $(li).find('textarea').val();
@@ -152,6 +161,7 @@ function saveCardData(li, kanban) {
         push(dbRef, myData)
             .then((snapshot) => {
                 li.id = snapshot.key;
+                path = path + li.id;
                 h3Element.html(h3Element.find('span.ui-accordion-header-icon').prop('outerHTML') + inputVal);
                 $(".kanbanCard").accordion({
                     collapsible: true,
@@ -163,7 +173,7 @@ function saveCardData(li, kanban) {
             });
     } else {
         // alert("OLD");
-        path = path + "/" + liID;
+        path = path + liID;
         const dbRef = ref(db, path);
 
         get(dbRef).then((snapshot) => {
@@ -189,6 +199,7 @@ function saveCardData(li, kanban) {
 function loadCardData(kanban) {
     // TODO(Joan) Modify to load specified kanban - Joan
     // TODO(Joan) unhide the kanban columns
+    clearUls();
     var userID = getUserID();
 
     if (!userID) {
@@ -199,13 +210,16 @@ function loadCardData(kanban) {
         // TODO(Joan) Replace notice saying kanban has not yet been saved - Joan
         return;
     }
+
+    currentKanban = kanban.id;
+
     $("#todo_sortable_div").css("display", "");
     $("#in_progress_sortable_div").css("display", "");
     $("#accomplished_sortable_div").css("display", "");
 
     console.log("kanban id: " + kanban.id);
 
-    var path0 = userID + "/" + kanban.id + "/" + "cards/";
+    var path0 = userID + "/personalKanbans/" + currentKanban + "/data/";
     path0 = path0 + "todo_sortable";
 
     const dbRef0 = ref(db, path0);
@@ -263,7 +277,7 @@ function loadCardData(kanban) {
         });
     });
 
-    var path1 = userID + "/" + kanban.id + "/" + "cards/";
+    var path1 = userID + "/personalKanbans/" + currentKanban + "/data/";
     path1 = path1 + "in_progress_sortable";
 
     const dbRef1 = ref(db, path1);
@@ -323,7 +337,7 @@ function loadCardData(kanban) {
         });
     });
 
-    var path2 = userID + "/" + kanban.id + "/" + "cards/";
+    var path2 = userID + "/personalKanbans/" + currentKanban + "/data/";
     path2 = path2 + "accomplished_sortable";
 
     const dbRef2 = ref(db, path2);
@@ -383,6 +397,7 @@ function loadCardData(kanban) {
 }
 
 function loadBoards() {
+    clearUls();
     var userID = getUserID();
 
     if (!userID) {
@@ -719,6 +734,13 @@ function deleteBoardData(li) {
             });
     }
     li.remove();
+}
+
+function clearUls() {
+    $("#todo_sortable").empty();
+    $("#in_progress_sortable").empty();
+    $("#accomplished_sortable").empty();
+
 }
 
 $(".sortable").sortable({
