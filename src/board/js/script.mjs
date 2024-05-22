@@ -212,6 +212,9 @@ function loadCardData(kanban) {
     }
 
     currentKanban = kanban.id;
+    var h3Element = $(kanban).find('h3');
+
+    $("#titleOfCurrentKanbanBeingLookedAt").text(h3Element.text());
 
     $("#todo_sortable_div").css("display", "");
     $("#in_progress_sortable_div").css("display", "");
@@ -713,6 +716,11 @@ function deleteBoardData(li) {
     var userID = getUserID();
     if (!userID) {
         return;
+    }
+
+    if (li.id === currentKanban) {
+        $("#titleOfCurrentKanbanBeingLookedAt").text("Please Load A Kanban");
+        currentKanban = undefined
     }
 
     var path = userID + "/personalKanbans/";
