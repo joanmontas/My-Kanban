@@ -76,9 +76,11 @@ function swapCardsData(previousColumn, currentColumn, li) {
         return;
     }
 
-    var path0 = "";
-    path0 = path0 + "/" + userID;
-    path0 = path0 + "/" + previousColumn;
+    if (currentKanban === 'undefined') {
+        return;
+    }
+
+    var path0 = userID + "/personalKanbans/" + currentKanban + "/data/" + previousColumn;
 
 
     if (typeof liID === 'undefined') {
@@ -87,16 +89,17 @@ function swapCardsData(previousColumn, currentColumn, li) {
     }
 
     path0 = path0 + "/" + liID;
+    console.log("Path0 = ", path0);
     const dbRef0 = ref(db, path0);
 
 
     get(dbRef0)
         .then((snapshot) => {
             const data = snapshot.val();
-            var path1 = "";
-            path1 = path1 + "/" + userID;
-            path1 = path1 + "/" + currentColumn;
+            var path1 = userID + "/personalKanbans/" + currentKanban + "/data/" + currentColumn;
+
             path1 = path1 + "/" + liID;
+
             const dbRef1 = ref(db, path1);
 
 
@@ -197,8 +200,6 @@ function saveCardData(li) {
 }
 
 function loadCardData(kanban) {
-    // TODO(Joan) Modify to load specified kanban - Joan
-    // TODO(Joan) unhide the kanban columns
     clearUls();
     var userID = getUserID();
 
@@ -451,17 +452,14 @@ function loadBoards() {
             const loadBut = newLi.querySelector("button.accordion-load-button");
 
             delBut.addEventListener("click", function() {
-                // TODO(Joan) Modify for the right path - Joan
                 deleteBoardData(newLi);
             });
 
             saveBut.addEventListener('click', function() {
-                // TODO(Joan) Modify for the right path - Joan
                 saveBoardData(newLi);
             });
 
             loadBut.addEventListener('click', function() {
-                // TODO(Joan) Give path to be loaded - Joan
                 loadCardData(newLi);
             });
         }
@@ -633,7 +631,6 @@ $("#add_kanban").click(function() {
     });
 
     loadBut.addEventListener('click', function() {
-        // TODO(Joan) Modify for the right board path - Joan
         loadCardData(newLi);
     });
 
@@ -742,6 +739,7 @@ function deleteBoardData(li) {
             });
     }
     li.remove();
+    clearUls();
 }
 
 function clearUls() {

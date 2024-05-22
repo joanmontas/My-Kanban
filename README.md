@@ -34,7 +34,7 @@ Database security configuration
 |                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
-| In Progress        | Update swap card data to reflect new location format|
+| In Progress        ||
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |
@@ -78,6 +78,7 @@ Database security configuration
 |                    | save and deleteCardData should pull data from the correct     board path|
 |                    | Create a clear board function|
 |                    | Change title of which board I am looking at upon loadCardData|
+|                    | Update swap card data to reflect new location format|
 
 
 
