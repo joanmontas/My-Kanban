@@ -24,7 +24,7 @@ Database security configuration
 | Column             | Description                                    |
 |--------------------|------------------------------------------------|
 |TODO                | Choose a style to be applied across the site. |
-|                    | Better customize items functionality for better |
+|                    | Customize items functionality for better back-end interaction |
 |                    | Create features page explain functionality so far.|
 |                    | replace logout button with drop down |
 |                    | Add anonymous authentication |
@@ -34,6 +34,8 @@ Database security configuration
 |                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
+|                    | Disable buttons when not valid: Example can't load unsaved kanban|
+|                    | Solidify naming convetion|
 | In Progress        ||
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
@@ -79,6 +81,7 @@ Database security configuration
 |                    | Create a clear board function|
 |                    | Change title of which board I am looking at upon loadCardData|
 |                    | Update swap card data to reflect new location format|
+|                    | Fixed delete current kanban bug|
 
 
 

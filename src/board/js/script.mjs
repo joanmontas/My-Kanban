@@ -717,7 +717,10 @@ function deleteBoardData(li) {
 
     if (li.id === currentKanban) {
         $("#titleOfCurrentKanbanBeingLookedAt").text("Please Load A Kanban");
-        currentKanban = undefined
+        currentKanban = undefined;
+        $("#todo_sortable_div").css("display", "none");
+        $("#in_progress_sortable_div").css("display", "none");
+        $("#accomplished_sortable_div").css("display", "none");
     }
 
     var path = userID + "/personalKanbans/";
@@ -739,7 +742,6 @@ function deleteBoardData(li) {
             });
     }
     li.remove();
-    clearUls();
 }
 
 function clearUls() {
