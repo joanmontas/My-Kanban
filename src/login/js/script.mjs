@@ -11,7 +11,8 @@ import {
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signInAnonymously,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 $("#signUpButton").click(function(event) {
@@ -52,6 +53,18 @@ $("#logInButton").click(function(event) {
         });
 });
 
+$('#anonymousLogInButton').click(function(event) {
+    signInAnonymously(auth)
+        .then(() => {
+            console.log("Successfully SignUp!");
+            window.location.href = "../../index.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+});
+
 $("#continueWithGoogleButton").click(function(event) {
     event.preventDefault();
     signInn();
@@ -61,4 +74,5 @@ $("#navBar").load("../../navbar.html", function() {
     $("#homeLink").attr("href", "../../index.html");
     $("#featuresLink").attr("href", "../../features/features.html");
     $("#boardLink").attr("href", "../../board/board.html");
+    $("#settingsLink").attr("href", "../../settings/settings.html");
 })

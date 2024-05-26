@@ -775,6 +775,7 @@ $(document).ready(function() {
     $("#navBar").load("../navbar.html", function() {
         $("#homeLink").attr("href", "../../index.html");
         $("#featuresLink").attr("href", "../features/features.html");
+        $("#settingsLink").attr("href", "../settings/settings.html");
         $("#boardLink").attr("href", "#");
     });
 })

@@ -27,16 +27,15 @@ Database security configuration
 |                    | Customize items functionality for better back-end interaction |
 |                    | Create features page explain functionality so far.|
 |                    | replace logout button with drop down |
-|                    | Add anonymous authentication |
 |                    | Add Date to the form. |
 |                    | Add about page |
-|                    | Add user setting |
 |                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
 |                    | Add visual cue upon add|
 |                    | Disable buttons when not valid: Example can't load unsaved kanban|
 |                    | Solidify naming convetion|
-| In Progress        ||
+|                    | Add cloud function to delete anonymous user after given data|
+| In Progress        |Add user settings|
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |
@@ -82,6 +81,7 @@ Database security configuration
 |                    | Change title of which board I am looking at upon loadCardData|
 |                    | Update swap card data to reflect new location format|
 |                    | Fixed delete current kanban bug|
+|                    | Add anonymous authentication |
 
 
 

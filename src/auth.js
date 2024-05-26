@@ -15,7 +15,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import {
@@ -92,7 +92,7 @@ async function registerNewUser() {
 }
 
 function createOwnKanban() {
-    // TODO() create a sample kanban for user to interact
+    // TODO(Joan) create a sample kanban for user to interact - Joan
     var id = getUserID();
     if (!id) {
         console.log("ERROR: createOwnKanban unable to find id");
@@ -116,14 +116,13 @@ function createOwnKanban() {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("logged", user);
-        // console.log("new? ", auth);
-        // console.log(auth.currentUser.metadata.createdAt, " ,", auth.currentUser.metadata.lastLoginAt);
         if (getUserID()) {
             registerNewUser();
         }
         $("#loginLogoutButton").text("Logout");
         $("#loginLogoutButton").on("click", signOutt);
         $('#boardLink').toggle();
+        $('#settingsLink').toggle();
     } else {
         console.log("Not logged ");
         $("#loginLogoutButton").text("Login");

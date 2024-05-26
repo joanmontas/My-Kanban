@@ -13,5 +13,6 @@ $(document).ready(function() {
         $("#homeLink").attr("href", "../index.html");
         $("#featuresLink").attr("href", "#");
         $("#boardLink").attr("href", "../board/board.html");
+        $("#settingsLink").attr("href", "../settings/settings.html");
     });
 })
