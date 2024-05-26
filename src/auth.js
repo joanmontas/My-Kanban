@@ -74,7 +74,10 @@ async function registerNewUser() {
             } else {
                 console.log("New user");
                 const mySettings = {
-                    name: "",
+                    firstName: "Jane",
+                    lastName: "Doe",
+                    displayName: "JDoe",
+                    picture: "default.png",
                     id: getUserID(),
                     created: auth.currentUser.metadata.createdAt,
                 };
@@ -93,6 +96,7 @@ async function registerNewUser() {
 
 function createOwnKanban() {
     // TODO(Joan) create a sample kanban for user to interact - Joan
+    var kanbanKey = undefined;
     var id = getUserID();
     if (!id) {
         console.log("ERROR: createOwnKanban unable to find id");
@@ -100,16 +104,44 @@ function createOwnKanban() {
     }
     var path = id + "/personalKanbans"
     const myData = {
-        title: "Your First Board",
-        detail: "In here you are welcome to explore the funcitonalities.",
+        title: "Click Here: First Kanban",
+        detail: "In here you are welcome to explore the funcitonalities. Click Load!",
     };
     const dbRef = ref(db, path);
     push(dbRef, myData)
         .then((snapshot) => {
             // Create kanban
+            kanbanKey = snapshot.key;
+            var pathTodo = path + "/" + kanbanKey + "/data/todo_sortable/";
+            console.log(pathTodo);
+            const myTodoData = {
+                detail: "You must mark tasks being worked on as in-progress.",
+                title: "Drag me to progress!",
+            };
+            const dbRefTodo = ref(db, pathTodo);
+            push(dbRefTodo, myTodoData)
+                .then(() => {})
+                .catch((error) => {
+                    console.error("Error: Unable to push data:", error);
+                    return;
+                });
+            var pathAccomplished = path + "/" + kanbanKey + "/data/accomplished_sortable/";
+            console.log(pathAccomplished);
+            const myAccomplishedData = {
+                detail: "Once finish, celebrate by marking your progress.",
+                title: "Click me! I am finished!",
+            };
+            const dbRefAccomplished = ref(db, pathAccomplished);
+            push(dbRefAccomplished, myAccomplishedData)
+                .then(() => {})
+                .catch((error) => {
+                    console.error("Error: Unable to push data:", error);
+                    return;
+                });
         })
         .catch((error) => {
             console.error("Error: Unable to push data:", error);
+            return;
         });
 }
 

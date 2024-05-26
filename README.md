@@ -35,7 +35,8 @@ Database security configuration
 |                    | Disable buttons when not valid: Example can't load unsaved kanban|
 |                    | Solidify naming convetion|
 |                    | Add cloud function to delete anonymous user after given data|
-| In Progress        |Add user settings|
+|                    |Setup Storage for image|
+| In Progress        ||
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |
@@ -82,6 +83,8 @@ Database security configuration
 |                    | Update swap card data to reflect new location format|
 |                    | Fixed delete current kanban bug|
 |                    | Add anonymous authentication |
+|                    | Upon user creation, first kanban should be created With more helpful details|
+|                    |Add user settings|
 
 
 
