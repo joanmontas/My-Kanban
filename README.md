@@ -84,7 +84,9 @@ Database security configuration
 |                    | Fixed delete current kanban bug|
 |                    | Add anonymous authentication |
 |                    | Upon user creation, first kanban should be created With more helpful details|
-|                    |Add user settings|
+|                    | Add user settings|
+|                    | Fixed load un-saved kanban bug|
+|                    | Refactor Board and Kanban <li>'s inner-html|
 
 
 

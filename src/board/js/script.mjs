@@ -29,6 +29,39 @@ import {
 
 var currentKanban = undefined;
 
+const cardNewLiInner = '<div class="accordion kanbanCard">' +
+    '<h3>New TODO</h3>' +
+    '<form>' +
+    '<div class="form-group">' +
+    '<label>Title</label>' +
+    '<input type="text" class="form-control" placeholder="Card Name">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label>Detail</label>' +
+    '<textarea class="form-control" rows="3"></textarea>' +
+    '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+    '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+    '</div>' +
+    '</form>' +
+    '</div>';
+
+const boardNewLiInner = '<div class="accordion kanbans">' +
+    '<h3>New Kanban</h3>' +
+    '<form>' +
+    '<div class="form-group">' +
+    '<label>Title</label>' +
+    '<input type="text" class="form-control" placeholder="Card Name">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label>Detail</label>' +
+    '<textarea class="form-control" rows="3"></textarea>' +
+    '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
+    '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
+    '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
+    '</div>' +
+    '</form>' +
+    '</div>';
+
 function deleteCardData(li) {
     // TODO(Joan) Modify to reflect current kanban - Joan
     // alert("delete!");
@@ -200,7 +233,6 @@ function saveCardData(li) {
 }
 
 function loadCardData(kanban) {
-    clearUls();
     var userID = getUserID();
 
     if (!userID) {
@@ -211,6 +243,8 @@ function loadCardData(kanban) {
         // TODO(Joan) Replace notice saying kanban has not yet been saved - Joan
         return;
     }
+
+    clearUls();
 
     currentKanban = kanban.id;
     var h3Element = $(kanban).find('h3');
@@ -234,22 +268,8 @@ function loadCardData(kanban) {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion kanbanCard">' +
-                '<h3>New TODO</h3>' +
-                '<form>' +
-                '<div class="form-group">' +
-                '<label>Title</label>' +
-                '<input type="text" class="form-control" placeholder="Card Name">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Detail</label>' +
-                '<textarea class="form-control" rows="3"></textarea>' +
-                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-                '</div>' +
-                '</form>' +
-                '</div>';
-            newLi.innerHTML = newLiInner;
+
+            newLi.innerHTML = cardNewLiInner;
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
@@ -292,22 +312,8 @@ function loadCardData(kanban) {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion kanbanCard">' +
-                '<h3>New TODO</h3>' +
-                '<form>' +
-                '<div class="form-group">' +
-                '<label>Title</label>' +
-                '<input type="text" class="form-control" placeholder="Card Name">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Detail</label>' +
-                '<textarea class="form-control" rows="3"></textarea>' +
-                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-                '</div>' +
-                '</form>' +
-                '</div>';
-            newLi.innerHTML = newLiInner;
+
+            newLi.innerHTML = cardNewLiInner;
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
@@ -352,22 +358,8 @@ function loadCardData(kanban) {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion kanbanCard">' +
-                '<h3>New TODO</h3>' +
-                '<form>' +
-                '<div class="form-group">' +
-                '<label>Title</label>' +
-                '<input type="text" class="form-control" placeholder="Card Name">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Detail</label>' +
-                '<textarea class="form-control" rows="3"></textarea>' +
-                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-                '</div>' +
-                '</form>' +
-                '</div>';
-            newLi.innerHTML = newLiInner;
+
+            newLi.innerHTML = cardNewLiInner;
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
@@ -401,12 +393,13 @@ function loadCardData(kanban) {
 }
 
 function loadBoards() {
-    clearUls();
     var userID = getUserID();
 
     if (!userID) {
         return;
     }
+
+    clearUls();
 
     var path0 = userID + "/personalKanbans";
 
@@ -418,23 +411,8 @@ function loadBoards() {
         for (const key in data) {
             const value = data[key];
             const newLi = document.createElement("li");
-            var newLiInner = '<div class="accordion kanbans">' +
-                '<h3>New Kanban</h3>' +
-                '<form>' +
-                '<div class="form-group">' +
-                '<label>Title</label>' +
-                '<input type="text" class="form-control" placeholder="Card Name">' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Detail</label>' +
-                '<textarea class="form-control" rows="3"></textarea>' +
-                '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-                '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-                '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
-                '</div>' +
-                '</form>' +
-                '</div>';
-            newLi.innerHTML = newLiInner;
+
+            newLi.innerHTML = boardNewLiInner;
 
             newLi.id = key;
             var h3Element = $(newLi).find('h3');
@@ -483,22 +461,8 @@ onAuthStateChanged(auth, () => {
 
 $("#add_todo").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion kanbanCard">' +
-        '<h3>New TODO</h3>' +
-        '<form>' +
-        '<div class="form-group">' +
-        '<label>Title</label>' +
-        '<input type="text" class="form-control" placeholder="Card Name">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label>Detail</label>' +
-        '<textarea class="form-control" rows="3"></textarea>' +
-        '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-        '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-    newLi.innerHTML = newLiInner;
+
+    newLi.innerHTML = cardNewLiInner;
 
     $("#todo_sortable").append(newLi);
 
@@ -521,22 +485,8 @@ $("#add_todo").click(function() {
 
 $("#add_in_progress").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion kanbanCard">' +
-        '<h3>New Progress</h3>' +
-        '<form>' +
-        '<div class="form-group">' +
-        '<label>Title</label>' +
-        '<input type="text" class="form-control" placeholder="Card Name">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label>Detail</label>' +
-        '<textarea class="form-control" rows="3"></textarea>' +
-        '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-        '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-    newLi.innerHTML = newLiInner;
+
+    newLi.innerHTML = cardNewLiInner;
 
     $("#in_progress_sortable").append(newLi);
 
@@ -559,22 +509,8 @@ $("#add_in_progress").click(function() {
 
 $("#add_accomplished").click(function() {
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion kanbanCard">' +
-        '<h3>New Accomplished</h3>' +
-        '<form>' +
-        '<div class="form-group">' +
-        '<label>Title</label>' +
-        '<input type="text" class="form-control" placeholder="Card Name">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label>Detail</label>' +
-        '<textarea class="form-control" rows="3"></textarea>' +
-        '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-        '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-    newLi.innerHTML = newLiInner;
+
+    newLi.innerHTML = cardNewLiInner;
 
     $("#accomplished_sortable").append(newLi);
 
@@ -598,23 +534,8 @@ $("#add_accomplished").click(function() {
 $("#add_kanban").click(function() {
     // TODO(Joan) Automatically save the kanban uppon add - Joan
     const newLi = document.createElement("li");
-    var newLiInner = '<div class="accordion kanbans">' +
-        '<h3>New Kanban</h3>' +
-        '<form>' +
-        '<div class="form-group">' +
-        '<label>Title</label>' +
-        '<input type="text" class="form-control" placeholder="Card Name">' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<label>Detail</label>' +
-        '<textarea class="form-control" rows="3"></textarea>' +
-        '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
-        '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-        '<button type="button" class="btn btn-success accordion-load-button">Load</button>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-    newLi.innerHTML = newLiInner;
+
+    newLi.innerHTML = boardNewLiInner;
 
     $("#list_kanban").append(newLi);
 
