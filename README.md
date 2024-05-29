@@ -27,7 +27,6 @@ Database security configuration
 |                    | Customize items functionality for better back-end interaction |
 |                    | Create features page explain functionality so far.|
 |                    | replace logout button with drop down |
-|                    | Add Date to the form. |
 |                    | Add about page |
 |                    | Make functions that rely on db async, and use await when calling them |
 |                    | Automatically save cards upon add|
@@ -35,8 +34,8 @@ Database security configuration
 |                    | Disable buttons when not valid: Example can't load unsaved kanban|
 |                    | Solidify naming convetion|
 |                    | Add cloud function to delete anonymous user after given data|
-|                    |Setup Storage for image|
-| In Progress        ||
+|                    | Setup Storage for image|
+| In Progress        | Add Date to the form and add its DB functionality|
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |

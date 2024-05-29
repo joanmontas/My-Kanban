@@ -33,17 +33,22 @@ const cardNewLiInner = '<div class="accordion kanbanCard">' +
     '<h3>New TODO</h3>' +
     '<form>' +
     '<div class="form-group">' +
-    '<label>Title</label>' +
-    '<input type="text" class="form-control" placeholder="Card Name">' +
+    '<label for="cardTitle">Title</label>' +
+    '<input type="text" class="form-control"  placeholder="Card Name">' +
     '</div>' +
     '<div class="form-group">' +
-    '<label>Detail</label>' +
-    '<textarea class="form-control" rows="3"></textarea>' +
+    '<label for="cardDetail">Detail</label>' +
+    '<textarea class="form-control"  rows="3"></textarea>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label for="cardDue">Due</label>' +
+    '<input type="date" class="form-control">' +
+    '</div>' +
     '<button type="button" class="btn btn-primary accordion-save-button">Save</button>' +
     '<button type="button" class="btn btn-danger accordion-delete-button">Delete</button>' +
-    '</div>' +
     '</form>' +
     '</div>';
+
 
 const boardNewLiInner = '<div class="accordion kanbans">' +
     '<h3>New Kanban</h3>' +
@@ -63,7 +68,6 @@ const boardNewLiInner = '<div class="accordion kanbans">' +
     '</div>';
 
 function deleteCardData(li) {
-    // TODO(Joan) Modify to reflect current kanban - Joan
     // alert("delete!");
 
     var liID = $(li).attr("id");
@@ -488,6 +492,9 @@ $("#add_in_progress").click(function() {
 
     newLi.innerHTML = cardNewLiInner;
 
+    var h3Element = $(newLi).find('h3');
+    h3Element.html('New Progress');
+
     $("#in_progress_sortable").append(newLi);
 
     const saveBut = newLi.querySelector("button.accordion-save-button");
@@ -511,6 +518,9 @@ $("#add_accomplished").click(function() {
     const newLi = document.createElement("li");
 
     newLi.innerHTML = cardNewLiInner;
+
+    var h3Element = $(newLi).find('h3');
+    h3Element.html('New Accomplished');
 
     $("#accomplished_sortable").append(newLi);
 
