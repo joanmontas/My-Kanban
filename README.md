@@ -35,7 +35,8 @@ Database security configuration
 |                    | Solidify naming convetion|
 |                    | Add cloud function to delete anonymous user after given data|
 |                    | Setup Storage for image|
-| In Progress        | Add Date to the form and add its DB functionality|
+|                    | Fixe BUg: Navbar accordion not expanding|
+| In Progress        | |
 | Accomplished       | Break down board into 3 categories             |
 |                    | Items can be interchanged in different columns.|
 |                    | Redesign the location of current 'DRAG ITEM'.   |
@@ -86,6 +87,7 @@ Database security configuration
 |                    | Add user settings|
 |                    | Fixed load un-saved kanban bug|
 |                    | Refactor Board and Kanban <li>'s inner-html|
+|                    | Add Date to the form and add its DB functionality|
 
 
 

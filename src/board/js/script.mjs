@@ -161,7 +161,6 @@ function swapCardsData(previousColumn, currentColumn, li) {
 }
 
 function saveCardData(li) {
-    // TODO(Joan) Modify to be save in the right kanban - Joan
     console.log("saving");
 
     if (!currentKanban) {
@@ -186,10 +185,12 @@ function saveCardData(li) {
     var textAreaVal = $(li).find('textarea').val();
 
     const inputVal = $(li).find('input').val();
+    const dateVal = $(li).find('input[type="date"]').val();
 
     const myData = {
         title: inputVal,
         detail: textAreaVal,
+        dueDate: dateVal,
     };
 
     console.log(textAreaVal);
@@ -285,6 +286,11 @@ function loadCardData(kanban) {
             var inputVal = $(newLi).find("input");
             inputVal.val(value["title"]);
 
+            var dateVal = $(newLi).find('input[type="date"]');
+            dateVal.val(value["dueDate"]);
+
+
+
             const saveBut = newLi.querySelector("button.accordion-save-button");
             const delBut = newLi.querySelector("button.accordion-delete-button");
 
@@ -331,6 +337,9 @@ function loadCardData(kanban) {
             var inputVal = $(newLi).find("input");
             inputVal.val(value["title"]);
 
+            var dateVal = $(newLi).find('input[type="date"]');
+            dateVal.val(value["dueDate"]);
+
             const saveBut = newLi.querySelector("button.accordion-save-button");
             const delBut = newLi.querySelector("button.accordion-delete-button");
 
@@ -374,6 +383,9 @@ function loadCardData(kanban) {
 
             var inputVal = $(newLi).find("input");
             inputVal.val(value["title"]);
+
+            var dateVal = $(newLi).find('input[type="date"]');
+            dateVal.val(value["dueDate"]);
 
             const saveBut = newLi.querySelector("button.accordion-save-button");
             const delBut = newLi.querySelector("button.accordion-delete-button");
