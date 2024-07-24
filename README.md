@@ -89,6 +89,7 @@ Database security configuration
 |                    | Fixed load un-saved kanban bug|
 |                    | Refactor Board and Kanban <li>'s inner-html|
 |                    | Add Date to the form and add its DB functionality|
+|                    | Make public|
 
 
 
